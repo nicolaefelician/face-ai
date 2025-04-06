@@ -7,8 +7,8 @@ struct SettingsView: View {
     
     @Environment(\.requestReview) var requestReview
     
-    let termsOfUseUrl = ""
-    let privacyPolicyUrl = ""
+    let termsOfUseUrl = "https://docs.google.com/document/d/1FrJuqu6jtwqWZ0mJiXe-cDIMotcfq7kHHmgUbmtKyGc/edit?usp=sharing"
+    let privacyPolicyUrl = "https://docs.google.com/document/d/1SkhgKKJOPVVyZSfsDd66ENzVKLK68Jdq_MfE1-IQ9oI/edit?usp=sharing"
     
     var body: some View {
         ScrollView {
