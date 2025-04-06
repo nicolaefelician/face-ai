@@ -1,0 +1,505 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8111F02E2DA23CBE0026B6B9 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 8111F02D2DA23CBE0026B6B9 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		8111F0302DA23CBE0026B6B9 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 8111F02F2DA23CBE0026B6B9 /* FirebaseCrashlytics */; };
+		8111F0322DA23CBE0026B6B9 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 8111F0312DA23CBE0026B6B9 /* FirebaseMessaging */; };
+		8111F0352DA23CFA0026B6B9 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 8111F0342DA23CFA0026B6B9 /* FirebaseAnalytics */; };
+		81220CFE2DA2A65600C79D00 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 81220CFD2DA2A65600C79D00 /* RevenueCat */; };
+		81220D012DA2A67000C79D00 /* SuperwallKit in Frameworks */ = {isa = PBXBuildFile; productRef = 81220D002DA2A67000C79D00 /* SuperwallKit */; };
+		81220F152DA2D8E600C79D00 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81220F142DA2D8E600C79D00 /* StoreKit.framework */; };
+		81AA55CA2DA071F70055C117 /* sound.caf in Resources */ = {isa = PBXBuildFile; fileRef = 81AA55C92DA071F70055C117 /* sound.caf */; };
+		919E809A18A5F9300B04EB58 /* Pods_FaceAI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5953071B0E1E6FE335050DD /* Pods_FaceAI.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1D7CBC94E86C1285A806469E /* Pods-FaceAI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FaceAI.debug.xcconfig"; path = "Target Support Files/Pods-FaceAI/Pods-FaceAI.debug.xcconfig"; sourceTree = "<group>"; };
+		81220F142DA2D8E600C79D00 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		81AA55C92DA071F70055C117 /* sound.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sound.caf; sourceTree = "<group>"; };
+		81DA3CEE2D8AC1810061476F /* FaceAI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceAI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5953071B0E1E6FE335050DD /* Pods_FaceAI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FaceAI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D938BBA695579B8D31E8DB46 /* Pods-FaceAI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FaceAI.release.xcconfig"; path = "Target Support Files/Pods-FaceAI/Pods-FaceAI.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		8125B0612D8C1B1000678375 /* Exceptions for "FaceAI" folder in "FaceAI" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 81DA3CED2D8AC1810061476F /* FaceAI */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		81DA3CF02D8AC1810061476F /* FaceAI */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				8125B0612D8C1B1000678375 /* Exceptions for "FaceAI" folder in "FaceAI" target */,
+			);
+			path = FaceAI;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		81DA3CEB2D8AC1810061476F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8111F0322DA23CBE0026B6B9 /* FirebaseMessaging in Frameworks */,
+				81220F152DA2D8E600C79D00 /* StoreKit.framework in Frameworks */,
+				8111F02E2DA23CBE0026B6B9 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				81220CFE2DA2A65600C79D00 /* RevenueCat in Frameworks */,
+				8111F0352DA23CFA0026B6B9 /* FirebaseAnalytics in Frameworks */,
+				81220D012DA2A67000C79D00 /* SuperwallKit in Frameworks */,
+				8111F0302DA23CBE0026B6B9 /* FirebaseCrashlytics in Frameworks */,
+				919E809A18A5F9300B04EB58 /* Pods_FaceAI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		242EE8AC01869F3274E7C899 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1D7CBC94E86C1285A806469E /* Pods-FaceAI.debug.xcconfig */,
+				D938BBA695579B8D31E8DB46 /* Pods-FaceAI.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		8111F0332DA23CFA0026B6B9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				81220F142DA2D8E600C79D00 /* StoreKit.framework */,
+				B5953071B0E1E6FE335050DD /* Pods_FaceAI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		81DA3CE52D8AC1810061476F = {
+			isa = PBXGroup;
+			children = (
+				81DA3CF02D8AC1810061476F /* FaceAI */,
+				81DA3CEF2D8AC1810061476F /* Products */,
+				81AA55C92DA071F70055C117 /* sound.caf */,
+				8111F0332DA23CFA0026B6B9 /* Frameworks */,
+				242EE8AC01869F3274E7C899 /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		81DA3CEF2D8AC1810061476F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				81DA3CEE2D8AC1810061476F /* FaceAI.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		81DA3CED2D8AC1810061476F /* FaceAI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 81DA3CFC2D8AC1820061476F /* Build configuration list for PBXNativeTarget "FaceAI" */;
+			buildPhases = (
+				E940838E7E3172ACF1836965 /* [CP] Check Pods Manifest.lock */,
+				81DA3CEA2D8AC1810061476F /* Sources */,
+				81DA3CEB2D8AC1810061476F /* Frameworks */,
+				81DA3CEC2D8AC1810061476F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				81DA3CF02D8AC1810061476F /* FaceAI */,
+			);
+			name = FaceAI;
+			packageProductDependencies = (
+				8111F02D2DA23CBE0026B6B9 /* FirebaseAnalyticsWithoutAdIdSupport */,
+				8111F02F2DA23CBE0026B6B9 /* FirebaseCrashlytics */,
+				8111F0312DA23CBE0026B6B9 /* FirebaseMessaging */,
+				8111F0342DA23CFA0026B6B9 /* FirebaseAnalytics */,
+				81220CFD2DA2A65600C79D00 /* RevenueCat */,
+				81220D002DA2A67000C79D00 /* SuperwallKit */,
+			);
+			productName = FaceAI;
+			productReference = 81DA3CEE2D8AC1810061476F /* FaceAI.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		81DA3CE62D8AC1810061476F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					81DA3CED2D8AC1810061476F = {
+						CreatedOnToolsVersion = 16.2;
+					};
+				};
+			};
+			buildConfigurationList = 81DA3CE92D8AC1810061476F /* Build configuration list for PBXProject "FaceAI" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 81DA3CE52D8AC1810061476F;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				8111F02C2DA23CBE0026B6B9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				81220CFC2DA2A65600C79D00 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */,
+				81220CFF2DA2A67000C79D00 /* XCRemoteSwiftPackageReference "Superwall-iOS" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 81DA3CEF2D8AC1810061476F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				81DA3CED2D8AC1810061476F /* FaceAI */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		81DA3CEC2D8AC1810061476F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				81AA55CA2DA071F70055C117 /* sound.caf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E940838E7E3172ACF1836965 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FaceAI-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		81DA3CEA2D8AC1810061476F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		81DA3CFA2D8AC1820061476F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		81DA3CFB2D8AC1820061476F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		81DA3CFD2D8AC1820061476F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1D7CBC94E86C1285A806469E /* Pods-FaceAI.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FaceAI/FaceAI.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"FaceAI/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FaceAI/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Face AI";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "We need access to your photo library to save images.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need photo access so you can choose images to enhance, filter, and remove backgrounds.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.denice.face.ai;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		81DA3CFE2D8AC1820061476F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D938BBA695579B8D31E8DB46 /* Pods-FaceAI.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FaceAI/FaceAI.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"FaceAI/Preview Content\"";
+				DEVELOPMENT_TEAM = LFM9U35578;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FaceAI/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Face AI";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "We need access to your photo library to save images.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need photo access so you can choose images to enhance, filter, and remove backgrounds.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.denice.face.ai;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		81DA3CE92D8AC1810061476F /* Build configuration list for PBXProject "FaceAI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				81DA3CFA2D8AC1820061476F /* Debug */,
+				81DA3CFB2D8AC1820061476F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		81DA3CFC2D8AC1820061476F /* Build configuration list for PBXNativeTarget "FaceAI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				81DA3CFD2D8AC1820061476F /* Debug */,
+				81DA3CFE2D8AC1820061476F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8111F02C2DA23CBE0026B6B9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.11.0;
+			};
+		};
+		81220CFC2DA2A65600C79D00 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RevenueCat/purchases-ios-spm";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.20.3;
+			};
+		};
+		81220CFF2DA2A67000C79D00 /* XCRemoteSwiftPackageReference "Superwall-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/superwall/Superwall-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.6;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8111F02D2DA23CBE0026B6B9 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8111F02C2DA23CBE0026B6B9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		8111F02F2DA23CBE0026B6B9 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8111F02C2DA23CBE0026B6B9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		8111F0312DA23CBE0026B6B9 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8111F02C2DA23CBE0026B6B9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		8111F0342DA23CFA0026B6B9 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8111F02C2DA23CBE0026B6B9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		81220CFD2DA2A65600C79D00 /* RevenueCat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 81220CFC2DA2A65600C79D00 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */;
+			productName = RevenueCat;
+		};
+		81220D002DA2A67000C79D00 /* SuperwallKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 81220CFF2DA2A67000C79D00 /* XCRemoteSwiftPackageReference "Superwall-iOS" */;
+			productName = SuperwallKit;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 81DA3CE62D8AC1810061476F /* Project object */;
+}
