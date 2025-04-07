@@ -3,6 +3,21 @@ import SwiftUI
 struct SplashView: View {
     @ObservedObject private var globalState = GlobalState.shared
     
+    @ObservedObject private var photoLibraryService = PhotoLibraryService.shared
+    
+    private func requestForAuthorizationIfNecessary() {
+        guard photoLibraryService.authorizationStatus != .authorized ||
+                photoLibraryService.authorizationStatus != .limited
+        else { return }
+        
+        photoLibraryService.requestAuthorization { error in
+            guard error != nil else { return }
+            self.globalState.alertTitle = "Error"
+            self.globalState.alertMessage = "Failed to authorize access to Photos."
+            self.globalState.showAlert = true
+        }
+    }
+    
     var body: some View {
         ZStack {
             VStack {
@@ -21,6 +36,10 @@ struct SplashView: View {
                     try await UserApi.shared.fetchEnhanceJobs()
                     try await UserApi.shared.fetchUserCredits()
                     
+                    if !globalState.showOnboarding {
+                        requestForAuthorizationIfNecessary()
+                    }
+                    
                     JobFetcher.shared.startWatcher()
                     
                     try await Task.sleep(nanoseconds: 1_000_000_000)
@@ -29,7 +48,7 @@ struct SplashView: View {
                 }
                 
                 AnalyticsManager.shared.logEvent(name: "App Launched")
-
+                
                 withAnimation {
                     globalState.showSplashView = false
                 }

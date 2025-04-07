@@ -75,32 +75,32 @@ final class Consts {
     }
     
     func saveImage(_ image: SavedImage) {
-//        let fileName = "saved_images.json"
-//        let fileURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0].appendingPathComponent(fileName)
-//        
-//        var currentImages: [SavedImage] = GlobalState.shared.savedImages
-//        
-//        if let data = try? Data(contentsOf: fileURL),
-//           let decoded = try? JSONDecoder().decode([SavedImage].self, from: data) {
-//            currentImages = decoded
-//        }
-//        
-//        if currentImages.contains(where: { $0.imageUrl == image.imageUrl }) {
-//            currentImages.removeAll { $0.imageUrl == image.imageUrl }
-//            GlobalState.shared.savedImages = currentImages
-//            return
-//        }
-//        
-//        currentImages.append(image)
-//        
-//        do {
-//            let jsonData = try JSONEncoder().encode(currentImages)
-//            try jsonData.write(to: fileURL, options: [.atomicWrite])
-//            GlobalState.shared.savedImages = currentImages
-//            print("✅ Image saved to cache: \(image.imageUrl)")
-//        } catch {
-//            print("❌ Failed to save image to cache:", error.localizedDescription)
-//        }
+        //        let fileName = "saved_images.json"
+        //        let fileURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0].appendingPathComponent(fileName)
+        //
+        //        var currentImages: [SavedImage] = GlobalState.shared.savedImages
+        //
+        //        if let data = try? Data(contentsOf: fileURL),
+        //           let decoded = try? JSONDecoder().decode([SavedImage].self, from: data) {
+        //            currentImages = decoded
+        //        }
+        //
+        //        if currentImages.contains(where: { $0.imageUrl == image.imageUrl }) {
+        //            currentImages.removeAll { $0.imageUrl == image.imageUrl }
+        //            GlobalState.shared.savedImages = currentImages
+        //            return
+        //        }
+        //
+        //        currentImages.append(image)
+        //
+        //        do {
+        //            let jsonData = try JSONEncoder().encode(currentImages)
+        //            try jsonData.write(to: fileURL, options: [.atomicWrite])
+        //            GlobalState.shared.savedImages = currentImages
+        //            print("✅ Image saved to cache: \(image.imageUrl)")
+        //        } catch {
+        //            print("❌ Failed to save image to cache:", error.localizedDescription)
+        //        }
         
         GlobalState.shared.savedImages.append(image)
     }
@@ -129,7 +129,8 @@ final class Consts {
             let jsonData = try JSONEncoder().encode(encodedImages)
             let fileURL = getUploadedImagesFileUrl()
             try jsonData.write(to: fileURL, options: .atomic)
-            print("✅ Images saved to \(fileURL)")
+            
+            uploadedImages = images
         } catch {
             print("❌ Error saving images: \(error)")
         }

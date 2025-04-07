@@ -16,7 +16,7 @@ struct HomeView: View {
             
             Spacer()
         }
-        .padding(.horizontal, 30)
+        .padding(.horizontal, 25)
         .padding(.top)
         .padding(.bottom, 15)
     }
@@ -44,7 +44,7 @@ struct HomeView: View {
                 }
             }
         }
-        .padding(.horizontal, 30)
+        .padding(.horizontal, 25)
         .padding(.top)
         .padding(.bottom, 15)
     }
@@ -83,80 +83,79 @@ struct HomeView: View {
                         Spacer()
                     }
                     .padding(.top, 10)
-                    .padding(.horizontal, 30)
+                    .padding(.horizontal, 25)
                     
-                    HStack(spacing: 4) {
-                        ForEach(photoLibraryService.results.suffix(5), id: \.self) { asset in
-                            Button {
-                                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                                withAnimation {
-                                    globalState.selectedImageId = asset.localIdentifier
-                                    globalState.showImageFilter = true
-                                }
-                            } label: {
-                                PhotoThumbnailView(assetLocalId: asset.localIdentifier)
-                                    .scaledToFill()
-                                    .frame(height: 70)
-                                    .frame(maxWidth: .infinity)
-                                    .cornerRadius(10)
-                            }
-                        }
-                    }
-                    .padding(.horizontal, 30)
-                    .padding(.top, 20)
-                    .padding(.bottom, 5)
-                    
-                    HStack(spacing: 4) {
-                        ForEach(photoLibraryService.results.prefix(4), id: \.self) { asset in
-                            Button {
-                                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                                withAnimation {
-                                    globalState.selectedImageId = asset.localIdentifier
-                                    globalState.showImageFilter = true
-                                }
-                            } label: {
-                                PhotoThumbnailView(assetLocalId: asset.localIdentifier)
-                                    .scaledToFill()
-                                    .frame(height: 70)
-                                    .frame(maxWidth: .infinity)
-                                    .cornerRadius(10)
-                            }
-                        }
-                        
-                        PhotosPicker(
-                            selection: $viewModel.selectedItem,
-                            matching: .images,
-                            photoLibrary: .shared()
-                        ) {
-                            VStack {
-                                Image(systemName: "photo.fill")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 33, height: 33)
-                                    .foregroundColor(Color(hex: "#8d8d8d"))
-                            }
-                            .frame(height: 70)
-                            .frame(maxWidth: .infinity)
-                            .background(Color(hex: "#ebebeb"))
-                            .cornerRadius(10)
-                        }
-                        .onChange(of: viewModel.selectedItem) { newItem in
-                            guard let newItem = newItem else { return }
-                            
-                            Task {
-                                if let data = try? await newItem.loadTransferable(type: Data.self),
-                                   let uiImage = UIImage(data: data) {
+                    if !photoLibraryService.results.isEmpty {
+                        HStack(spacing: 4) {
+                            ForEach(photoLibraryService.results.suffix(5), id: \.self) { asset in
+                                Button {
+                                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                                     withAnimation {
-                                        globalState.selectedImage = uiImage
+                                        globalState.selectedImageId = asset.localIdentifier
                                         globalState.showImageFilter = true
+                                    }
+                                } label: {
+                                    PhotoThumbnailView(assetLocalId: asset.localIdentifier)
+                                        .scaledToFill()
+                                        .frame(height: 70)
+                                        .frame(maxWidth: .infinity)
+                                        .cornerRadius(10)
+                                }
+                            }
+                        }
+                        .padding(.horizontal, 25)
+                        .padding(.top, 20)
+                        .padding(.bottom, 5)
+                        
+                        HStack(spacing: 4) {
+                            ForEach(photoLibraryService.results.prefix(4), id: \.self) { asset in
+                                Button {
+                                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                                    withAnimation {
+                                        globalState.selectedImageId = asset.localIdentifier
+                                        globalState.showImageFilter = true
+                                    }
+                                } label: {
+                                    PhotoThumbnailView(assetLocalId: asset.localIdentifier)
+                                        .scaledToFill()
+                                        .frame(height: 70)
+                                        .frame(maxWidth: .infinity)
+                                        .cornerRadius(10)
+                                }
+                            }
+                            
+                            PhotosPicker(
+                                selection: $viewModel.selectedItem,
+                                matching: .images,
+                                photoLibrary: .shared()
+                            ) {
+                                VStack {
+                                    Image(systemName: "photo.fill")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 33, height: 33)
+                                        .foregroundColor(Color(hex: "#8d8d8d"))
+                                }
+                                .frame(height: 70)
+                                .frame(maxWidth: .infinity)
+                                .background(Color(hex: "#ebebeb"))
+                                .cornerRadius(10)
+                            }
+                            .onChange(of: viewModel.selectedItem) { newItem in
+                                guard let newItem = newItem else { return }
+                                
+                                Task {
+                                    if let data = try? await newItem.loadTransferable(type: Data.self),
+                                       let uiImage = UIImage(data: data) {
+                                        withAnimation {
+                                            globalState.selectedImage = uiImage
+                                            globalState.showImageFilter = true
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
-                    .padding(.horizontal, 30)
-                    .onAppear {
-                        viewModel.requestForAuthorizationIfNecessary()
+                        .padding(.horizontal, 25)
                     }
                     
                     if globalState.historyJobs.contains(where: { $0.status == .processing }) ||
@@ -196,7 +195,7 @@ struct HomeView: View {
                                 .foregroundStyle(.black)
                             Spacer()
                         }
-                        .padding(30)
+                        .padding(25)
                         
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 7.5) {
@@ -236,7 +235,7 @@ struct HomeView: View {
                                     }
                                 }
                             }
-                            .padding(.horizontal, 30)
+                            .padding(.horizontal, 25)
                         }
                         .padding(.bottom, 10)
                         .frame(height: images.first?.imageSize.height ?? 150)

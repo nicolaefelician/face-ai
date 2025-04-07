@@ -23,8 +23,6 @@ final class UserApi {
         
         let (data, response) = try await URLSession.shared.data(for: request)
         
-        print(userId.uuidString)
-        
         if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode != 200 {
             throw ApiError.invalidResponse(message: "Failed to fetch credits")
         }
@@ -45,7 +43,7 @@ final class UserApi {
             throw ApiError.invalidResponse(message: "User ID not found")
         }
         
-        guard let url = URL(string: "\(Consts.shared.apiBaseUrl)/api/user/register-user?userId=\(userId)") else {
+        guard let url = URL(string: "\(Consts.shared.apiBaseUrl)/api/user/register-user") else {
             throw URLError(.badURL)
         }
         
@@ -55,7 +53,8 @@ final class UserApi {
         let body: [String: Any?] = [
             "tuneId": tuneId,
             "gender": gender,
-            "fcmTokenId": Consts.shared.fcmTokenId
+            "fcmTokenId": Consts.shared.fcmTokenId,
+            "id": userId.uuidString
         ]
         
         let jsonData = try JSONSerialization.data(withJSONObject: body, options: [])
@@ -111,6 +110,11 @@ final class UserApi {
         request.httpMethod = "GET"
         
         let (data, response) = try await URLSession.shared.data(for: request)
+        
+        if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode != 200 {
+            print("Failed to fetch enhance images. Status code: \(httpResponse.statusCode)")
+            throw URLError(.badServerResponse)
+        }
         
         let decoded = try JSONDecoder().decode([EnhanceImage].self, from: data)
         

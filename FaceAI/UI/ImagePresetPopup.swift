@@ -7,24 +7,29 @@ struct ImagePresetPopup: View {
     private func onConfirm(_ preset: ImagePreset) async {
         do {
             withAnimation {
+                globalState.showPresetPreview = false
                 globalState.isLoading = true
             }
             
             if !Consts.shared.hasTunedModel {
-                try await ImageAiApi.shared.tuneModel()
+                try await ImageAiApi.shared.tuneModel(preset: preset)
+                globalState.historyJobs.append(ImageJob())
+                
+            } else {
+                try await ImageAiApi.shared.createGenerationQueue(preset: preset)
             }
             
-            try await ImageAiApi.shared.createGenerationQueue(preset: preset)
-            
             withAnimation {
-                globalState.isLoading = false
-                globalState.showPresetPreview = false
                 globalState.showQueuePopup = true
             }
         } catch {
             globalState.alertTitle = "Error"
             globalState.alertMessage = error.localizedDescription
             globalState.showAlert = true
+        }
+        
+        withAnimation {
+            globalState.isLoading = false
         }
     }
     

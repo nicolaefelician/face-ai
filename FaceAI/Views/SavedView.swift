@@ -2,7 +2,7 @@
 //
 //struct SavedImageCard: View {
 //    let image: SavedImage
-//
+//    
 //    var body: some View {
 //        VStack(alignment: .leading, spacing: 8) {
 //            AsyncImage(url: image.imageUrl) { phase in
@@ -15,7 +15,7 @@
 //                    }
 //                    .frame(height: 340)
 //                    .cornerRadius(18)
-//
+//                    
 //                case .success(let loadedImage):
 //                    loadedImage
 //                        .resizable()
@@ -24,7 +24,7 @@
 //                        .frame(maxWidth: .infinity)
 //                        .clipped()
 //                        .cornerRadius(18)
-//
+//                    
 //                case .failure:
 //                    Image(systemName: "xmark.octagon.fill")
 //                        .resizable()
@@ -32,16 +32,16 @@
 //                        .frame(height: 80)
 //                        .foregroundColor(.red)
 //                        .padding()
-//
+//                    
 //                @unknown default:
 //                    EmptyView()
 //                }
 //            }
-//
+//            
 //            Text(image.presetCategory.rawValue)
 //                .font(.custom(Fonts.shared.interSemibold, size: 15))
 //                .foregroundColor(.black)
-//
+//            
 //            Text(image.creationDate.formatted(date: .abbreviated, time: .shortened))
 //                .font(.custom(Fonts.shared.interRegular, size: 13))
 //                .foregroundColor(.gray)

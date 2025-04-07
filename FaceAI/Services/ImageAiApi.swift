@@ -17,8 +17,26 @@ final class ImageAiApi {
         let prompt: PromptResponse
     }
     
-    private func createMultipartBody(images: [UIImage], boundary: String) -> Data {
+    private func createMultipartBody(
+        images: [UIImage],
+        boundary: String,
+        gender: String,
+        prompt: String,
+        presetCategory: String
+    ) -> Data {
         var body = Data()
+        
+        let params: [String: String] = [
+            "gender": gender,
+            "prompt": prompt,
+            "presetCategory": presetCategory
+        ]
+        
+        for (key, value) in params {
+            body.append("--\(boundary)\r\n")
+            body.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
+            body.append("\(value)\r\n")
+        }
         
         for (index, image) in images.enumerated() {
             guard let imageData = image.jpegData(compressionQuality: 0.9) else { continue }
@@ -38,14 +56,20 @@ final class ImageAiApi {
         return body
     }
     
-    func tuneModel() async throws {
-        if Consts.shared.uploadedImages.isEmpty { throw ApiError.invalidResponse(message: "No images uploaded") }
+    func tuneModel(preset: ImagePreset) async throws {
+        if Consts.shared.uploadedImages.isEmpty {
+            throw ApiError.invalidResponse(message: "No images uploaded")
+        }
         
         guard let gender = Consts.shared.selectedGender else {
             throw ApiError.invalidResponse(message: "User gender must be selected")
         }
         
-        guard let url = URL(string: "\(Consts.shared.apiBaseUrl)/api/image/tune-model?gender=\(gender)") else {
+        guard let userId = Consts.shared.userId else {
+            throw ApiError.invalidResponse(message: "User id must be set")
+        }
+        
+        guard let url = URL(string: "\(Consts.shared.apiBaseUrl)/api/image/tune-model?userId=\(userId)") else {
             throw ApiError.invalidResponse(message: "Url is invalid")
         }
         
@@ -55,10 +79,15 @@ final class ImageAiApi {
         let boundary = "Boundary-\(UUID().uuidString)"
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         
-        let httpBody = createMultipartBody(images: Consts.shared.uploadedImages, boundary: boundary)
+        let httpBody = createMultipartBody(images: Consts.shared.uploadedImages, boundary: boundary, gender: gender, prompt: preset.systemPrompt, presetCategory: preset.category.rawValue)
+        
         request.httpBody = httpBody
         
         let (data, response) = try await URLSession.shared.data(for: request)
+        
+        if let stringData = String(data: data, encoding: .utf8) {
+            print("Response body: \(stringData)")
+        }
         
         if let httpResponse = response as? HTTPURLResponse {
             guard (200...299).contains(httpResponse.statusCode) else {
@@ -80,7 +109,9 @@ final class ImageAiApi {
             throw ApiError.invalidResponse(message: "User ID is required")
         }
         
-        guard let url = URL(string: "\(Consts.shared.apiBaseUrl)/api/image/generate-headshot?userId=\(userId)&prompt=\(preset.systemPrompt)&presetCategory=\(preset.category.rawValue)") else {
+        let encodedPrompt = preset.systemPrompt.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        
+        guard let url = URL(string: "\(Consts.shared.apiBaseUrl)/api/image/generate-headshot?userId=\(userId)&prompt=\(encodedPrompt)&presetCategory=\(preset.category.rawValue)") else {
             throw URLError(.badURL)
         }
         

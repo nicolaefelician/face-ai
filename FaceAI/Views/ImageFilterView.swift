@@ -121,13 +121,13 @@ struct ImageFilterView: View {
                 
                 Button(action: {
                     UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                    let image = SavedImage(jobId: jobId, index: viewModel.selectedImageIndex, type: type, presetCategory: .headshots, creationDate: Date.now)
-                    Consts.shared.saveImage(image)
+                    globalState.savedImages.append(SavedImage(jobId: jobId, index: viewModel.selectedImageIndex, type: type, presetCategory: .headshots, creationDate: Date.now))
+                    //                    Consts.shared.saveImage(SavedImage(jobId: jobId, index: viewModel.selectedImageIndex, type: type, presetCategory: .headshots, creationDate: Date.now))
                 }) {
                     let isSaved = globalState.savedImages.contains {
                         $0.jobId == jobId && $0.index == viewModel.selectedImageIndex
                     }
-
+                    
                     Image(isSaved ? "saved" : "save")
                         .resizable()
                         .scaledToFit()

@@ -51,7 +51,16 @@ final class SubscriptionController: PurchaseController  {
                 return .cancelled
             } else {
                 GlobalState.shared.isProUser = true
-                try? await UserApi.shared.fetchUserCredits()
+                
+                switch sk2Product.id {
+                case "com.face.ai.weekly":
+                    GlobalState.shared.credits += 200
+                case "com.face.ai.monthly":
+                    GlobalState.shared.credits += 1000
+                default:
+                    break
+                }
+                
                 return .purchased
             }
         } catch let error as ErrorCode {

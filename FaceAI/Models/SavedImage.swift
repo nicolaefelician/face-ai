@@ -4,7 +4,7 @@ final class SavedImage: Codable {
     let jobId: String
     let index: Int
     let type: GenerationType
-    let presetCategory: PresetCategory
+    let presetCategory: PresetCategory?
     let creationDate: Date
     
     init(from decoder: any Decoder) throws {

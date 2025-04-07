@@ -28,6 +28,8 @@ final class JobFetcher {
                         shouldContinue = true
                     }
                     
+                    try await UserApi.shared.fetchUserCredits()
+                    
                     if !shouldContinue {
                         isRunning = false
                         break

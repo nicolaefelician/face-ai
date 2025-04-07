@@ -226,16 +226,20 @@ struct OnboardingView: View {
             .onChange(of: viewModel.selectedItems) { newItems in
                 Task {
                     viewModel.selectedImages.removeAll()
+                    
                     withAnimation {
                         viewModel.isLoading = true
                     }
+                    
                     for item in newItems {
                         if let data = try? await item.loadTransferable(type: Data.self),
                            let uiImage = UIImage(data: data) {
                             viewModel.selectedImages.append(uiImage)
                         }
                     }
+                    
                     Consts.shared.setUploadImages(viewModel.selectedImages)
+                    
                     withAnimation {
                         viewModel.isLoading = false
                     }
@@ -271,7 +275,7 @@ struct OnboardingView: View {
                         Rectangle()
                             .frame(height: 4)
                             .frame(maxWidth: .infinity)
-                            .foregroundStyle(viewModel.currentUploadedPhotoIndex == index ? Colors.shared.primaryColor : Color.gray)
+                            .foregroundStyle(viewModel.currentUploadedPhotoIndex == index ? Colors.shared.primaryColor : Color.gray.opacity(0.5))
                             .cornerRadius(12)
                     }
                 }
@@ -314,6 +318,11 @@ struct OnboardingView: View {
                 .padding(.horizontal, 37)
             }
         }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                viewModel.requestForAuthorizationIfNecessary()
+            }
+        }
     }
     
     private func loadingPage() -> some View {
@@ -324,7 +333,7 @@ struct OnboardingView: View {
                 .font(.custom(Fonts.shared.instrumentSansSemibold, size: 28))
                 .foregroundStyle(.black)
                 .padding(.bottom, 3)
-                .padding(.top, 30)
+                .padding(.top, 60)
             
             Text("Please wait a few moments")
                 .font(.custom(Fonts.shared.interRegular, size: 18))
@@ -355,13 +364,16 @@ struct OnboardingView: View {
         } else if viewModel.showGenerationView {
             loadingPage()
         } else {
+            let screenWidth = UIScreen.main.bounds.width
+            let screenHeight = UIScreen.main.bounds.height
+            
             VStack {
                 TabView(selection: $viewModel.currentPageIndex) {
                     VStack {
                         ZStack {
                             GifView("onboarding1")
                                 .scaledToFill()
-                                .frame(width: screenWidth, height: 700)
+                                .frame(width: screenWidth, height: screenHeight * 0.75)
                                 .clipped()
                             
                             VStack {
@@ -376,7 +388,7 @@ struct OnboardingView: View {
                                     startPoint: .top,
                                     endPoint: .bottom
                                 )
-                                .frame(height: 150)
+                                .frame(height: screenHeight * 0.17)
                                 .padding(.top, 60)
                                 
                                 Spacer()
@@ -418,11 +430,11 @@ struct OnboardingView: View {
                                 .multilineTextAlignment(.leading)
                         }
                         .padding(.horizontal, 38)
-                        .padding(.bottom, 30)
+                        .padding(.bottom, screenHeight * 0.03)
                         
                         Spacer()
                     }
-                    .padding(.top, -175)
+                    .padding(.top, -screenHeight * 0.175)
                     .tag(0)
                     
                     VStack {
@@ -442,7 +454,7 @@ struct OnboardingView: View {
                                     endPoint: .bottom
                                 )
                                 .frame(height: 160)
-                                .padding(.top, 100)
+                                .padding(.top, -10)
                                 
                                 Spacer()
                             }
@@ -469,7 +481,7 @@ struct OnboardingView: View {
                                 )
                                 .frame(height: 90)
                             }
-                            .padding(.bottom, 50)
+                            .padding(.bottom, 45)
                         }
                         
                         VStack(alignment: .leading) {
@@ -489,57 +501,23 @@ struct OnboardingView: View {
                                 .padding(.top, 4)
                                 .multilineTextAlignment(.leading)
                         }
-                        .padding(.horizontal, 38)
+                        .padding(.horizontal, screenWidth * 0.1)
                         .padding(.bottom, 30)
                         
                         Spacer()
                     }
-                    .padding(.top, -90)
+                    .padding(.top, screenHeight * 0.035)
                     .tag(1)
                     
                     VStack {
-                        ZStack {
-                            GifView("onboarding3")
-                                .scaledToFill()
-                                .frame(height: 800)
-                                .frame(width: screenWidth)
-                                .clipped()
-                            
-                            VStack {
-                                LinearGradient(
-                                    gradient: Gradient(colors: [
-                                        Color.white,
-                                        Color.white,
-                                        Color.white.opacity(0.4),
-                                        Color.white.opacity(0)
-                                    ]),
-                                    startPoint: .top,
-                                    endPoint: .bottom
-                                )
-                                .frame(height: 90)
-                                .padding(.top, 400)
-                                
-                                Spacer()
-                            }
-                            
-                            VStack {
-                                Spacer()
-                                
-                                LinearGradient(
-                                    gradient: Gradient(colors: [
-                                        Color.white,
-                                        Color.white,
-                                        Color.white.opacity(0.7),
-                                        Color.white.opacity(0.4),
-                                        Color.white.opacity(0)
-                                    ]),
-                                    startPoint: .bottom,
-                                    endPoint: .top
-                                )
-                                .frame(height: 70)
-                            }
-                            .padding(.bottom, 20)
-                        }
+                        GifView("onboarding3")
+                            .scaledToFill()
+                            .frame(height: screenHeight * 0.7)
+                            .frame(width: screenWidth)
+                            .clipped()
+                            .padding(.top, screenHeight * 0.10)
+                        
+                        Spacer()
                         
                         VStack(alignment: .leading) {
                             Text("Remove Backgrounds")
@@ -560,10 +538,8 @@ struct OnboardingView: View {
                         }
                         .padding(.horizontal, 38)
                         .padding(.bottom, 30)
-                        
-                        Spacer()
                     }
-                    .padding(.top, -350)
+                    .padding(.top, -screenHeight * 0.33)
                     .tag(2)
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))

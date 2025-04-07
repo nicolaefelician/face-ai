@@ -43,6 +43,7 @@ struct ImageFilterPopup: View {
                     }
                 case .removeBackground:
                     let job = try await StabilityAiApi.shared.removeBackground(image: uiImage)
+                    globalState.credits -= 5
                     globalState.navigationPath.append(.imageFilter(jobId: job.id, type: .filter))
                 }
             } catch {
