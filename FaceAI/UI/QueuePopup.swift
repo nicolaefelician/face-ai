@@ -1,4 +1,5 @@
 import SwiftUI
+import Lottie
 
 struct QueuePopup: View {
     @ObservedObject private var globalState = GlobalState.shared
@@ -19,7 +20,9 @@ struct QueuePopup: View {
                     .foregroundColor(.red)
                     .multilineTextAlignment(.center)
                 
-                ProgressView()
+                LottieView(animation: .named("loading"))
+                    .looping()
+                    .frame(height: 70)
                 
                 Button(action: {
                     withAnimation {

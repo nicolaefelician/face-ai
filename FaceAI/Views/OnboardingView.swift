@@ -1,6 +1,7 @@
 import SwiftUI
 import PhotosUI
 import SuperwallKit
+import Lottie
 
 struct OnboardingView: View {
     private struct OnboardingInfo {
@@ -329,7 +330,7 @@ struct OnboardingView: View {
         VStack(spacing: 0) {
             Spacer()
             
-            Text("Processing data...")
+            Text("Analyzing your photos...")
                 .font(.custom(Fonts.shared.instrumentSansSemibold, size: 28))
                 .foregroundStyle(.black)
                 .padding(.bottom, 3)
@@ -339,22 +340,25 @@ struct OnboardingView: View {
                 .font(.custom(Fonts.shared.interRegular, size: 18))
                 .foregroundStyle(.accent)
                 .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
                         Superwall.shared.register(placement: "campaign_trigger")
                         
                         Consts.shared.completeOnboarding()
                     }
                 }
             
-            GifView("generation")
-                .frame(width: 160, height: 250)
+            LottieView(animation: .named("processing"))
+                .looping()
+                .resizable()
+                .scaledToFit()
+                .frame(width: 120, height: 120)
+                .padding(.top)
             
             Spacer()
         }
     }
     
     var body: some View {
-        let screenWidth = UIScreen.main.bounds.width
         if viewModel.showGenderPicker {
             genderPickerPage()
         } else if viewModel.showPrivacyPolicy {

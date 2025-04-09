@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8101FBCC2DA6EE89002336DA /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 8101FBCB2DA6EE89002336DA /* Lottie */; };
 		8111F02E2DA23CBE0026B6B9 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 8111F02D2DA23CBE0026B6B9 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		8111F0302DA23CBE0026B6B9 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 8111F02F2DA23CBE0026B6B9 /* FirebaseCrashlytics */; };
 		8111F0322DA23CBE0026B6B9 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 8111F0312DA23CBE0026B6B9 /* FirebaseMessaging */; };
@@ -58,6 +59,7 @@
 				81220D012DA2A67000C79D00 /* SuperwallKit in Frameworks */,
 				8111F0302DA23CBE0026B6B9 /* FirebaseCrashlytics in Frameworks */,
 				919E809A18A5F9300B04EB58 /* Pods_FaceAI.framework in Frameworks */,
+				8101FBCC2DA6EE89002336DA /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,6 +129,7 @@
 				8111F0342DA23CFA0026B6B9 /* FirebaseAnalytics */,
 				81220CFD2DA2A65600C79D00 /* RevenueCat */,
 				81220D002DA2A67000C79D00 /* SuperwallKit */,
+				8101FBCB2DA6EE89002336DA /* Lottie */,
 			);
 			productName = FaceAI;
 			productReference = 81DA3CEE2D8AC1810061476F /* FaceAI.app */;
@@ -160,6 +163,7 @@
 				8111F02C2DA23CBE0026B6B9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				81220CFC2DA2A65600C79D00 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */,
 				81220CFF2DA2A67000C79D00 /* XCRemoteSwiftPackageReference "Superwall-iOS" */,
+				8101FBCA2DA6EE89002336DA /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 81DA3CEF2D8AC1810061476F /* Products */;
@@ -345,9 +349,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = FaceAI/FaceAI.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"FaceAI/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = LFM9U35578;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FaceAI/Info.plist;
@@ -364,8 +368,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.denice.face.ai;
+				MARKETING_VERSION = 1.0.4;
+				PRODUCT_BUNDLE_IDENTIFIER = com.patt.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -383,9 +387,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = FaceAI/FaceAI.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"FaceAI/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = LFM9U35578;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FaceAI/Info.plist;
@@ -402,8 +406,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.denice.face.ai;
+				MARKETING_VERSION = 1.0.4;
+				PRODUCT_BUNDLE_IDENTIFIER = com.patt.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -437,6 +441,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		8101FBCA2DA6EE89002336DA /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.1;
+			};
+		};
 		8111F02C2DA23CBE0026B6B9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -464,6 +476,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		8101FBCB2DA6EE89002336DA /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8101FBCA2DA6EE89002336DA /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
 		8111F02D2DA23CBE0026B6B9 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8111F02C2DA23CBE0026B6B9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

@@ -1,4 +1,5 @@
 import SwiftUI
+import Lottie
 
 struct SplashView: View {
     @ObservedObject private var globalState = GlobalState.shared
@@ -23,8 +24,11 @@ struct SplashView: View {
             VStack {
                 Spacer()
                 
-                ProgressView()
-                    .frame(width: 160, height: 250)
+                LottieView(animation: .named("generating"))
+                    .looping()
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 250, height: 250)
                 
                 Spacer()
             }
@@ -61,7 +65,7 @@ struct SplashView: View {
                     .font(.custom(Fonts.shared.interSemibold, size: 28))
                     .foregroundStyle(.red.opacity(0.9))
                 
-                Text("Powered by Goat Apps")
+                Text("Powered by Denice Apps")
                     .font(.custom(Fonts.shared.interRegular, size: 18))
                     .foregroundStyle(.black.opacity(0.65))
                     .padding(.bottom, 20)

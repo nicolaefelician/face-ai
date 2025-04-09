@@ -107,8 +107,6 @@ extension AppDelegate: MessagingDelegate {
             return
         }
         
-        print("fcm token")
-        
         Consts.shared.setFcmToken(fcmToken)
         
         let dataDict: [String: String] = ["token": fcmToken]
