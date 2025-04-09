@@ -46,7 +46,7 @@ struct PhotoThumbnailView: View {
             }
         }
         .task {
-//            await loadImageAsset()
+            await loadImageAsset()
         }
         .onDisappear {
             image = nil

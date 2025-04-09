@@ -173,15 +173,16 @@ struct HomeView: View {
                     }
                     
                     if globalState.historyJobs.contains(where: { $0.status == .complete }) ||
-                        globalState.enhanceJobs.contains(where: { $0.status == .processing }) {
-                        
+                        globalState.enhanceJobs.contains(where: { $0.status == .successful || $0.status == .failed }) {
                         historyHeader()
                         
                         if let job = globalState.historyJobs.last, job.status == .complete {
                             ImageJobCard(job: job, showDate: true)
                         }
                         
-                        if let enhanceJob = globalState.enhanceJobs.last(where: { $0.status == .successful }) {
+                        if let enhanceJob = globalState.enhanceJobs.last(where: {
+                            $0.status == .successful || $0.status == .failed
+                        }) {
                             EnhanceJobCard(job: enhanceJob, showDate: true)
                         }
                     }

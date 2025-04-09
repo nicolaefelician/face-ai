@@ -57,8 +57,8 @@ enum JobStatus: Int, Codable {
 
 enum EnhanceStatus: String, Codable {
     case starting = "Starting"
-    case processing = "Processing"
-    case successful = "Successful"
+    case processing = "Running"
+    case successful = "Succeeded"
     case failed = "Failed"
     case canceled = "Canceled"
 }
