@@ -73,7 +73,7 @@ struct ImagePresetPopup: View {
                             .padding(.top, 10)
                     }
                     
-                    Text("We'll use the style and composition of this preset to generate photos of yourself")
+                    Text("We'll use the style and composition of this preset to generate photos of yourself. This action will cost 15 credits.")
                         .font(.custom(Fonts.shared.interRegular, size: 17))
                         .foregroundStyle(.black.opacity(0.7))
                         .multilineTextAlignment(.center)

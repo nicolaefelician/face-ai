@@ -64,9 +64,9 @@ struct ImageFilterPopup: View {
     private var descriptionText: String {
         switch globalState.selectedFilterType {
         case .enhance:
-            return "Enhance this image to improve clarity and resolution."
+            return "Enhance this image to improve clarity and resolution. This action will cost 10 credits."
         case .removeBackground:
-            return "Remove the background from this image."
+            return "Remove the background from this image. This action will cost 5 credits."
         }
     }
     
