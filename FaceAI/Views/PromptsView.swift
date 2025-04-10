@@ -30,7 +30,7 @@ struct PromptsView: View {
     
     var body: some View {
         ScrollView {
-            VStack {
+            LazyVStack {
                 HStack {
                     Image("search")
                         .resizable()

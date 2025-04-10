@@ -5,10 +5,6 @@ final class ImageAiApi {
     
     private init() {}
     
-    private struct TuneResponse: Codable {
-        let id: Int
-    }
-    
     private struct ImageGenerationResponse: Codable {
         struct PromptResponse: Codable {
             let images: [String]
@@ -99,9 +95,7 @@ final class ImageAiApi {
             print("Response body: \(responseString)")
         }
         
-        let decoded = try JSONDecoder().decode(TuneResponse.self, from: data)
-        
-        try await UserApi.shared.registerUser(tuneId: decoded.id)
+        Consts.shared.setHasTunedModel(true)
     }
     
     func createGenerationQueue(preset: ImagePreset) async throws {

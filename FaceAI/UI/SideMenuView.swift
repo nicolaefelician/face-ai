@@ -31,7 +31,7 @@ struct SideMenuView: View {
                     Text("Credits Left")
                         .font(.custom(Fonts.shared.interSemibold, size: 14))
                         .foregroundStyle(.gray)
-
+                    
                     Text("\(globalState.credits)")
                         .font(.custom(Fonts.shared.instrumentSansSemibold, size: 28))
                         .foregroundStyle(Colors.shared.primaryColor)
@@ -62,9 +62,9 @@ struct SideMenuView: View {
                 Spacer()
                 
                 VStack(alignment: .leading, spacing: 18) {
-//                    SideMenuItem(label: "Saved Images", icon: "bookmark", action: {
-//                        globalState.navigationPath.append(.saved)
-//                    })
+                    SideMenuItem(label: "Saved Images", icon: "bookmark", action: {
+                        globalState.navigationPath.append(.saved)
+                    })
                     SideMenuItem(label: "History", icon: "clock", action: {
                         globalState.navigationPath.append(.history)
                     })

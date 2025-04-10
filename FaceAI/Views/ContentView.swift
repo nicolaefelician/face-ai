@@ -85,7 +85,7 @@ struct ContentView: View {
                     .navigationDestination(for: NavigationDestination.self) { destination in
                         switch destination {
                         case .settings: SettingsView()
-//                        case .saved: SavedView()
+                        case .saved: SavedView()
                         case .history: HistoryView()
                         case .prompts(let category) : PromptsView(presetCategory: category)
                         case .imageFilter(let jobId, let type) : ImageFilterView(jobId: jobId, type: type)

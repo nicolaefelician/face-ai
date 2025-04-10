@@ -339,12 +339,14 @@ struct OnboardingView: View {
             Text("Please wait a few moments")
                 .font(.custom(Fonts.shared.interRegular, size: 18))
                 .foregroundStyle(.accent)
-                .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-                        Superwall.shared.register(placement: "campaign_trigger")
-                        
-                        Consts.shared.completeOnboarding()
-                    }
+                .task {
+                    try? await UserApi.shared.registerUser()
+                    
+                    try? await Task.sleep(nanoseconds: 3 * 1_000_000_000)
+                    
+                    Superwall.shared.register(placement: "campaign_trigger")
+                    
+                    Consts.shared.completeOnboarding()
                 }
             
             LottieView(animation: .named("processing"))

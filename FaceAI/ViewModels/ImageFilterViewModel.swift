@@ -5,6 +5,8 @@ final class ImageFilterViewModel: ObservableObject {
     @Published var selectedImageIndex = 0
     @Published var isLoading = false
     
+    @Published var savedImagesIndex: [Int] = []
+    
     @ObservedObject private var globalState = GlobalState.shared
     
     @Published var images: [UIImage] = []
@@ -48,7 +50,11 @@ final class ImageFilterViewModel: ObservableObject {
         }
     }
     
-    func addToSaved(image: UIImage) {
-        
+    func addToSaved() {
+        if let imageData = images[selectedImageIndex].pngData() {
+            let savedImage = SavedImage(id: UUID(), imageData: imageData, creationDate: Date.now)
+            Consts.shared.saveImage(savedImage)
+            savedImagesIndex.append(selectedImageIndex)
+        }
     }
 }

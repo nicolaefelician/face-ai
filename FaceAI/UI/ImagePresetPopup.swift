@@ -101,7 +101,6 @@ struct ImagePresetPopup: View {
                     }
                     
                     Button(action: {
-                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                         withAnimation {
                             globalState.showPresetPreview = false
                         }
@@ -118,7 +117,7 @@ struct ImagePresetPopup: View {
                         .padding(.horizontal, 20)
                         .background(Color(.systemGray5))
                         .clipShape(Capsule())
-                        .shadow(color: .black.opacity(0.2), radius: 8, x: 0, y: 5) // 💥 stronger shadow
+                        .shadow(color: .black.opacity(0.2), radius: 8, x: 0, y: 5)
                         .padding(.top)
                     }
                     

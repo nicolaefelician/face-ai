@@ -54,8 +54,10 @@ final class SubscriptionController: PurchaseController  {
                 
                 switch sk2Product.id {
                 case "com.face.ai.weekly":
+                    try? await UserApi.shared.addCredits(200)
                     GlobalState.shared.credits += 200
                 case "com.face.ai.monthly":
+                    try? await UserApi.shared.addCredits(1000)
                     GlobalState.shared.credits += 1000
                 default:
                     break

@@ -9,6 +9,25 @@ final class UserApi {
         let credits: Int
     }
     
+    func addCredits(_ credits: Int) async throws {
+        guard let userId = Consts.shared.userId else {
+            throw ApiError.invalidResponse(message: "User ID not found")
+        }
+        
+        guard let url = URL(string: "\(Consts.shared.apiBaseUrl)/api/revenuecat/set-credits-after-purchase?userId=\(userId.uuidString)&credits=\(credits)") else {
+            throw URLError(.badURL)
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        let (_, response) = try await URLSession.shared.data(for: request)
+        
+        if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode != 200 {
+            throw ApiError.invalidResponse(message: "Failed to fetch credits")
+        }
+    }
+    
     func fetchUserCredits() async throws {
         guard let userId = Consts.shared.userId else {
             throw ApiError.invalidResponse(message: "User ID not found")
@@ -34,7 +53,7 @@ final class UserApi {
         }
     }
     
-    func registerUser(tuneId: Int) async throws {
+    func registerUser() async throws {
         guard let gender = Consts.shared.selectedGender else {
             throw ApiError.invalidResponse(message: "User gender not selected")
         }
@@ -51,7 +70,7 @@ final class UserApi {
         request.httpMethod = "POST"
         
         let body: [String: Any?] = [
-            "tuneId": tuneId,
+            "tuneId": 0,
             "gender": gender,
             "fcmTokenId": Consts.shared.fcmTokenId,
             "id": userId.uuidString
@@ -64,10 +83,6 @@ final class UserApi {
         
         if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode != 200 {
             throw ApiError.invalidResponse(message: "The server returned an error code: \(httpResponse.statusCode)")
-        }
-        
-        DispatchQueue.main.async {
-            Consts.shared.setHasTunedModel(true)
         }
         
         print("✅ User registered successfully")

@@ -58,11 +58,11 @@ struct SplashView: View {
                 }
             }
             
-            VStack {
+            VStack(spacing: 10) {
                 Spacer()
                 
                 Text("Face AI")
-                    .font(.custom(Fonts.shared.interSemibold, size: 28))
+                    .font(.custom(Fonts.shared.instrumentSansSemibold, size: 28))
                     .foregroundStyle(.red.opacity(0.9))
                 
                 Text("Powered by Denice Apps")

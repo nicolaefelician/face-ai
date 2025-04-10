@@ -44,7 +44,7 @@ enum QueryError: Error {
 
 enum NavigationDestination: Hashable {
     case settings
-//    case saved
+    case saved
     case history
     case prompts(category: PresetCategory?)
     case imageFilter(jobId: String, type: GenerationType)
@@ -63,7 +63,7 @@ enum EnhanceStatus: String, Codable {
     case canceled = "Canceled"
 }
 
-enum FilterType {
+enum FilterType: Codable {
     case enhance
     case removeBackground
 }

@@ -23,12 +23,18 @@ struct ImageFilterView: View {
             } else {
                 TabView(selection: $viewModel.selectedImageIndex) {
                     ForEach(Array(viewModel.images.enumerated()), id: \.offset) { index, image in
-                        Image(uiImage: image)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 330, height: 400)
-                            .cornerRadius(13)
-                            .padding(.bottom)
+                        Button(action: {
+                            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                            globalState.selectedImage = image
+                            globalState.showFullscreenImage = true
+                        }) {
+                            Image(uiImage: image)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 330, height: 400)
+                                .cornerRadius(13)
+                                .padding(.bottom)
+                        }
                     }
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
@@ -57,91 +63,97 @@ struct ImageFilterView: View {
             
             Spacer()
             
-            HStack {
-                Spacer()
-                
-                Button(action: {
-                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                    if viewModel.images.count <= 1 {
-                        presentationMode.wrappedValue.dismiss()
-                    } else if viewModel.selectedImageIndex < viewModel.images.count {
-                        withAnimation {
-                            viewModel.images.remove(at: viewModel.selectedImageIndex)
+            if !viewModel.images.isEmpty {
+                HStack {
+                    Spacer()
+                    
+                    Button(action: {
+                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                        if viewModel.images.count <= 1 {
+                            presentationMode.wrappedValue.dismiss()
+                        } else if viewModel.selectedImageIndex < viewModel.images.count {
+                            withAnimation {
+                                viewModel.images.remove(at: viewModel.selectedImageIndex)
+                            }
+                        }
+                    }) {
+                        Image("delete")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 25, height: 25)
+                            .padding(15)
+                            .background(
+                                Circle()
+                                    .stroke(Color.red, lineWidth: 1.5)
+                            )
+                    }
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                        
+                        saveToPhotos(viewModel.images[viewModel.selectedImageIndex])
+                    }) {
+                        Image("download")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 25, height: 25)
+                            .padding(15)
+                            .background(
+                                Circle()
+                                    .stroke(Color(hex: "#808080"), lineWidth: 1.5)
+                            )
+                    }
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                        globalState.imagesToShow = [viewModel.images[viewModel.selectedImageIndex]]
+                        globalState.isSharingImages = true
+                    }) {
+                        Image("share")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 25, height: 25)
+                            .padding(15)
+                            .background(
+                                Circle()
+                                    .stroke(Color(hex: "#808080"), lineWidth: 1.5)
+                            )
+                    }
+                    
+                    Spacer()
+                    
+                    if viewModel.selectedImageIndex < viewModel.images.count {
+                        Button(action: {
+                            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                            
+                            if viewModel.savedImagesIndex.contains(where: { $0 == viewModel.selectedImageIndex }) {
+                                return
+                            }
+                            
+                            viewModel.addToSaved()
+                        }) {
+                            let isSaved = viewModel.savedImagesIndex.contains(viewModel.selectedImageIndex)
+                            
+                            Image(isSaved ? "saved" : "save")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 25, height: 25)
+                                .padding(15)
+                                .background(
+                                    Circle()
+                                        .stroke(Color(hex: "#808080"), lineWidth: 1.5)
+                                )
                         }
                     }
-                }) {
-                    Image("delete")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 25, height: 25)
-                        .padding(15)
-                        .background(
-                            Circle()
-                                .stroke(Color.red, lineWidth: 1.5)
-                        )
-                }
-                
-                Spacer()
-                
-                Button(action: {
-                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                     
-                    saveToPhotos(viewModel.images[viewModel.selectedImageIndex])
-                }) {
-                    Image("download")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 25, height: 25)
-                        .padding(15)
-                        .background(
-                            Circle()
-                                .stroke(Color(hex: "#808080"), lineWidth: 1.5)
-                        )
+                    Spacer()
                 }
-                
-                Spacer()
-                
-                Button(action: {
-                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                    globalState.imagesToShow = [viewModel.images[viewModel.selectedImageIndex]]
-                    globalState.isSharingImages = true
-                }) {
-                    Image("share")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 25, height: 25)
-                        .padding(15)
-                        .background(
-                            Circle()
-                                .stroke(Color(hex: "#808080"), lineWidth: 1.5)
-                        )
-                }
-                
-                Spacer()
-                
-                Button(action: {
-                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                    globalState.savedImages.append(SavedImage(jobId: jobId, index: viewModel.selectedImageIndex, type: type, presetCategory: .headshots, creationDate: Date.now))
-                    //                    Consts.shared.saveImage(SavedImage(jobId: jobId, index: viewModel.selectedImageIndex, type: type, presetCategory: .headshots, creationDate: Date.now))
-                }) {
-                    let isSaved = globalState.savedImages.contains {
-                        $0.jobId == jobId && $0.index == viewModel.selectedImageIndex
-                    }
-                    
-                    Image(isSaved ? "saved" : "save")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 25, height: 25)
-                        .padding(15)
-                        .background(
-                            Circle()
-                                .stroke(Color(hex: "#808080"), lineWidth: 1.5)
-                        )
-                }
-                
-                Spacer()
+                .padding(.bottom, 30)
             }
-            .padding(.bottom, 30)
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {

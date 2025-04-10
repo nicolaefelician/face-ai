@@ -14,23 +14,23 @@ struct SettingsView: View {
         ScrollView {
             VStack(spacing: 20) {
                 Button(action: { rateApp() }) {
-                    SettingsButtonView(title: "Rate App", icon: "star.fill")
+                    SettingsButtonView(title: "Rate App", icon: "star.fill", iconColor: .yellow)
                 }
                 
                 Button(action: { shareApp() }) {
-                    SettingsButtonView(title: "Share App", icon: "square.and.arrow.up")
+                    SettingsButtonView(title: "Share App", icon: "square.and.arrow.up", iconColor: .blue)
                 }
                 
                 Button(action: { contactUs() }) {
-                    SettingsButtonView(title: "Contact us", icon: "ellipsis.message.fill")
+                    SettingsButtonView(title: "Contact us", icon: "ellipsis.message.fill", iconColor: .green)
                 }
                 
                 Button(action: { openUrl(privacyPolicyUrl) }) {
-                    SettingsButtonView(title: "Privacy Policy", icon: "lock.shield")
+                    SettingsButtonView(title: "Privacy Policy", icon: "lock.shield", iconColor: .purple)
                 }
                 
                 Button(action: { openUrl(termsOfUseUrl) }) {
-                    SettingsButtonView(title: "Terms of Use", icon: "doc.text")
+                    SettingsButtonView(title: "Terms of Use", icon: "doc.text", iconColor: .orange)
                 }
             }
             .padding()
@@ -40,6 +40,7 @@ struct SettingsView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: {
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                     presentationMode.wrappedValue.dismiss()
                 }) {
                     Image("back")
@@ -88,15 +89,16 @@ struct SettingsView: View {
 struct SettingsButtonView: View {
     let title: String
     let icon: String
+    let iconColor: Color
     
     var body: some View {
         HStack {
             Image(systemName: icon)
                 .frame(width: 30, height: 30)
-                .foregroundColor(.gray)
+                .foregroundColor(iconColor)
             
             Text(title)
-                .foregroundColor(.gray)
+                .foregroundColor(.black)
                 .font(.custom(Fonts.shared.instrumentSansSemibold, size: 17))
             
             Spacer()
@@ -105,7 +107,7 @@ struct SettingsButtonView: View {
                 .foregroundColor(.gray)
         }
         .padding()
-        .background(Color.gray.opacity(0.2))
+        .background(Color.gray.opacity(0.1))
         .cornerRadius(12)
     }
 }

@@ -20,8 +20,6 @@ final class Consts {
     let revenueCatApiKey: String = "appl_XkYNHSHHWXphXOJgkAJvJiyuAyg"
     
     func loadConfig() {
-        selectedGender = UserDefaults.standard.string(forKey: "gender")
-        
         if let storedUserId = UserDefaults.standard.string(forKey: "userId"),
            let uuid = UUID(uuidString: storedUserId) {
             self.userId = uuid
@@ -31,8 +29,10 @@ final class Consts {
             UserDefaults.standard.set(newUserId.uuidString, forKey: "userId")
         }
         
+        selectedGender = UserDefaults.standard.string(forKey: "gender")
         fcmTokenId = UserDefaults.standard.string(forKey: "fcmToken")
         hasTunedModel = UserDefaults.standard.bool(forKey: "hasTunedModel")
+        
         loadUploadedImages()
         loadSavedImages()
     }
@@ -75,34 +75,31 @@ final class Consts {
     }
     
     func saveImage(_ image: SavedImage) {
-        //        let fileName = "saved_images.json"
-        //        let fileURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0].appendingPathComponent(fileName)
-        //
-        //        var currentImages: [SavedImage] = GlobalState.shared.savedImages
-        //
-        //        if let data = try? Data(contentsOf: fileURL),
-        //           let decoded = try? JSONDecoder().decode([SavedImage].self, from: data) {
-        //            currentImages = decoded
-        //        }
-        //
-        //        if currentImages.contains(where: { $0.imageUrl == image.imageUrl }) {
-        //            currentImages.removeAll { $0.imageUrl == image.imageUrl }
-        //            GlobalState.shared.savedImages = currentImages
-        //            return
-        //        }
-        //
-        //        currentImages.append(image)
-        //
-        //        do {
-        //            let jsonData = try JSONEncoder().encode(currentImages)
-        //            try jsonData.write(to: fileURL, options: [.atomicWrite])
-        //            GlobalState.shared.savedImages = currentImages
-        //            print("✅ Image saved to cache: \(image.imageUrl)")
-        //        } catch {
-        //            print("❌ Failed to save image to cache:", error.localizedDescription)
-        //        }
+        let fileName = "saved_images.json"
+        let fileURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0].appendingPathComponent(fileName)
         
-        GlobalState.shared.savedImages.append(image)
+        var currentImages: [SavedImage] = GlobalState.shared.savedImages
+        
+        if let data = try? Data(contentsOf: fileURL),
+           let decoded = try? JSONDecoder().decode([SavedImage].self, from: data) {
+            currentImages = decoded
+        }
+        
+        if currentImages.contains(where: { $0.id == image.id }) {
+            currentImages.removeAll { $0.id == image.id }
+            GlobalState.shared.savedImages = currentImages
+            return
+        }
+        
+        currentImages.append(image)
+        
+        do {
+            let jsonData = try JSONEncoder().encode(currentImages)
+            try jsonData.write(to: fileURL, options: [.atomicWrite])
+            GlobalState.shared.savedImages = currentImages
+        } catch {
+            print("❌ Failed to save image to cache:", error.localizedDescription)
+        }
     }
     
     private func loadSavedImages() {

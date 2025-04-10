@@ -34,19 +34,6 @@ struct FullscreenImageCover: View {
         }
     }
     
-    private func loadImage() async {
-        guard let url = globalState.selectedImageUrl else { return }
-        
-        do {
-            let (data, _) = try await URLSession.shared.data(from: url)
-            if let uiImage = UIImage(data: data) {
-                image = Image(uiImage: uiImage)
-            }
-        } catch {
-            print("❌ Failed to load image:", error.localizedDescription)
-        }
-    }
-    
     var body: some View {
         ZStack {
             Color.white.ignoresSafeArea()
@@ -64,9 +51,9 @@ struct FullscreenImageCover: View {
                         )
                         .gesture(
                             MagnificationGesture()
-                            .onChanged(onZoomGestureStarted)
-                            .onEnded(onZoomGestureEnded)
-                        ) 
+                                .onChanged(onZoomGestureStarted)
+                                .onEnded(onZoomGestureEnded)
+                        )
                         .frame(width: proxy.size.width, height: proxy.size.height)
                         .clipped()
                         .animation(.easeInOut(duration: 0.33), value: zoomScale)
@@ -79,6 +66,7 @@ struct FullscreenImageCover: View {
             VStack {
                 HStack {
                     Spacer()
+                    
                     Button(action: {
                         UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                         withAnimation {
@@ -93,11 +81,14 @@ struct FullscreenImageCover: View {
                             .padding()
                     }
                 }
+                
                 Spacer()
             }
         }
-        .task {
-            await loadImage()
+        .onAppear {
+            if let uiImage = globalState.selectedImage {
+                image = Image(uiImage: uiImage)
+            }
         }
     }
 }
