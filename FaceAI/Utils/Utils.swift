@@ -2,6 +2,8 @@ import Foundation
 import UIKit
 import SwiftUI
 
+let isIpad = UIDevice.current.userInterfaceIdiom == .pad
+
 extension UIImage {
     func toBase64() -> String? {
         guard let imageData = self.jpegData(compressionQuality: 1.0) else {
@@ -68,7 +70,7 @@ enum FilterType: Codable {
     case removeBackground
 }
 
-enum GenerationType: CaseIterable, Codable {
+enum GenerationType: String, CaseIterable, Codable {
     case headshot
     case filter
 }

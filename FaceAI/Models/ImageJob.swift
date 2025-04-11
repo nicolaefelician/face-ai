@@ -39,22 +39,4 @@ final class ImageJob: Identifiable, Decodable {
         formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
         self.creationDate = formatter.date(from: dateStr) ?? Date.now
     }
-    
-    init(
-        id: Int = -1,
-        userId: UUID = UUID(),
-        status: JobStatus = .processing,
-        systemPrompt: String = "",
-        creationDate: Date = Date(),
-        images: String = "[]",
-        presetCategory: PresetCategory = .business
-    ) {
-        self.id = id
-        self.userId = userId
-        self.status = status
-        self.systemPrompt = systemPrompt
-        self.creationDate = creationDate
-        self.images = images
-        self.presetCategory = presetCategory
-    }
 }

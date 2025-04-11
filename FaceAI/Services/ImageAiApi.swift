@@ -95,7 +95,10 @@ final class ImageAiApi {
             print("Response body: \(responseString)")
         }
         
-        Consts.shared.setHasTunedModel(true)
+        DispatchQueue.main.async {
+            Consts.shared.setHasTunedModel(true)
+            JobFetcher.shared.startWatcher()
+        }
     }
     
     func createGenerationQueue(preset: ImagePreset) async throws {

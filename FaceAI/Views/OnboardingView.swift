@@ -34,8 +34,8 @@ struct OnboardingView: View {
             Image("gender")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 240, height: 240)
-                .padding(.top, 65)
+                .frame(width: isIpad ? 400 : 240, height: isIpad ? 400 : 240)
+                .padding(.top, isIpad ? 150 : 65)
             
             Text("Select Gender")
                 .font(.custom(Fonts.shared.instrumentSansSemibold, size: 28))
@@ -96,9 +96,9 @@ struct OnboardingView: View {
             }) {
                 ZStack(alignment: .center) {
                     Text("Continue")
-                        .font(.custom(Fonts.shared.interSemibold, size: 20))
+                        .font(.custom(Fonts.shared.interSemibold, size: isIpad ? 24 : 20))
                         .foregroundStyle(Color.white)
-                        .padding(.vertical, 16)
+                        .padding(.vertical, isIpad ? 22 : 16)
                         .frame(maxWidth: .infinity)
                         .background(viewModel.selectedGender.isEmpty ? Color.gray : Colors.shared.primaryColor)
                         .cornerRadius(24)
@@ -114,7 +114,7 @@ struct OnboardingView: View {
                             .padding(.trailing, 15)
                     }
                 }
-                .padding(.horizontal, 37)
+                .padding(.horizontal, isIpad ? 70 : 37)
                 .padding(.bottom, 20)
             }
         }
@@ -125,18 +125,18 @@ struct OnboardingView: View {
         
         return VStack {
             GifView("privacy")
-                .frame(width: 430, height: 310)
+                .frame(width: isIpad ? 645 : 430, height: isIpad ? 465 : 310)
                 .padding(.top, screenHeight * 0.13)
             
             VStack(alignment: .leading) {
                 Text("Privacy Policy")
-                    .font(.custom(Fonts.shared.interSemibold, size: 28))
+                    .font(.custom(Fonts.shared.interSemibold, size: isIpad ? 45 : 28))
                     .foregroundColor(Colors.shared.primaryColor)
                     .multilineTextAlignment(.leading)
                     .padding(.top, 16)
                 
                 Text("By continuing you accept our Privacy Policy and Terms of Use, and permision to your galery.")
-                    .font(.custom(Fonts.shared.interRegular, size: 16))
+                    .font(.custom(Fonts.shared.interRegular, size: isIpad ? 22 : 16))
                     .foregroundStyle(.black.opacity(0.75))
                     .multilineTextAlignment(.leading)
                     .padding(.top, 4)
@@ -150,9 +150,9 @@ struct OnboardingView: View {
                     }
                 }) {
                     Text("Accept All")
-                        .font(.custom(Fonts.shared.interSemibold, size: 20))
+                        .font(.custom(Fonts.shared.interSemibold, size: isIpad ? 24 : 20))
                         .foregroundStyle(Color.white)
-                        .padding(.vertical, 16)
+                        .padding(.vertical, isIpad ? 22 : 16)
                         .frame(maxWidth: .infinity)
                         .background(Colors.shared.primaryColor)
                         .cornerRadius(24)
@@ -166,9 +166,9 @@ struct OnboardingView: View {
                     }
                 }) {
                     Text("Refuse")
-                        .font(.custom(Fonts.shared.interSemibold, size: 20))
+                        .font(.custom(Fonts.shared.interSemibold, size: isIpad ? 24 : 20))
                         .foregroundColor(Color.gray)
-                        .padding(.vertical, 16)
+                        .padding(.vertical, isIpad ? 22 : 16)
                         .frame(maxWidth: .infinity)
                         .background(Color.white)
                         .overlay(
@@ -179,8 +179,8 @@ struct OnboardingView: View {
                         .shadow(color: Color.black.opacity(0.1), radius: 6, x: 0, y: 4)
                 }
             }
-            .padding(.horizontal, 38)
-            .padding(.bottom, 20)
+            .padding(.horizontal, isIpad ? 70 : 38)
+            .padding(.bottom, isIpad ? 40 : 20)
         }
     }
     
@@ -297,9 +297,9 @@ struct OnboardingView: View {
             }) {
                 ZStack(alignment: .center) {
                     Text("Get Started")
-                        .font(.custom(Fonts.shared.interSemibold, size: 20))
+                        .font(.custom(Fonts.shared.interSemibold, size: isIpad ? 24 : 20))
                         .foregroundStyle(Color.white)
-                        .padding(.vertical, 16)
+                        .padding(.vertical, isIpad ? 22 : 16)
                         .frame(maxWidth: .infinity)
                         .background(viewModel.selectedImages.count < 8 ? Color.gray : Colors.shared.primaryColor)
                         .cornerRadius(24)
@@ -316,7 +316,7 @@ struct OnboardingView: View {
                     }
                 }
                 .padding(.bottom, 20)
-                .padding(.horizontal, 37)
+                .padding(.horizontal, isIpad ? 70 : 37)
             }
         }
         .onAppear {
@@ -420,22 +420,22 @@ struct OnboardingView: View {
                         
                         VStack(alignment: .leading) {
                             Text("Welcome to")
-                                .font(.custom(Fonts.shared.instrumentSansSemibold, size: 26))
+                                .font(.custom(Fonts.shared.instrumentSansSemibold, size: isIpad ? 45 : 26))
                                 .foregroundStyle(.black)
                                 .multilineTextAlignment(.leading)
                             
                             Text("AI Photo Enhancer")
-                                .font(.custom(Fonts.shared.instrumentSansSemibold, size: 26))
+                                .font(.custom(Fonts.shared.instrumentSansSemibold, size: isIpad ? 45 : 26))
                                 .foregroundStyle(Colors.shared.primaryColor)
                                 .multilineTextAlignment(.leading)
                             
                             Text("Welcome to AI Photo Enhancer, where your photos transform into masterpieces with just a tap. Let's embark on a journey of effortless editing.")
-                                .font(.custom(Fonts.shared.interRegular, size: 17))
+                                .font(.custom(Fonts.shared.interRegular, size: isIpad ? 21 : 17))
                                 .foregroundStyle(.black.opacity(0.7))
                                 .padding(.top, 4)
                                 .multilineTextAlignment(.leading)
                         }
-                        .padding(.horizontal, 38)
+                        .padding(.horizontal, isIpad ? 70 : 38)
                         .padding(.bottom, screenHeight * 0.03)
                         
                         Spacer()
@@ -492,17 +492,17 @@ struct OnboardingView: View {
                         
                         VStack(alignment: .leading) {
                             Text("AI-Powered")
-                                .font(.custom(Fonts.shared.instrumentSansSemibold, size: 26))
+                                .font(.custom(Fonts.shared.instrumentSansSemibold, size: isIpad ? 45 : 26))
                                 .foregroundStyle(.black)
                                 .multilineTextAlignment(.leading)
                             
                             Text("Photo Enhancer")
-                                .font(.custom(Fonts.shared.instrumentSansSemibold, size: 26))
+                                .font(.custom(Fonts.shared.instrumentSansSemibold, size: isIpad ? 45 : 26))
                                 .foregroundStyle(Colors.shared.primaryColor)
                                 .multilineTextAlignment(.leading)
                             
                             Text("Enhance image quality instantly with AI. Sharpen details, improve lighting, and restore clarity — all in one tap. Say goodbye to blurry, dull photos.")
-                                .font(.custom(Fonts.shared.interRegular, size: 17))
+                                .font(.custom(Fonts.shared.interRegular, size: isIpad ? 21 : 17))
                                 .foregroundStyle(.black.opacity(0.7))
                                 .padding(.top, 4)
                                 .multilineTextAlignment(.leading)
@@ -527,22 +527,22 @@ struct OnboardingView: View {
                         
                         VStack(alignment: .leading) {
                             Text("Remove Backgrounds")
-                                .font(.custom(Fonts.shared.instrumentSansSemibold, size: 26))
+                                .font(.custom(Fonts.shared.instrumentSansSemibold, size: isIpad ? 45 : 26))
                                 .foregroundStyle(.black)
                                 .multilineTextAlignment(.leading)
                             
                             Text("with One Tap")
-                                .font(.custom(Fonts.shared.instrumentSansSemibold, size: 26))
+                                .font(.custom(Fonts.shared.instrumentSansSemibold, size: isIpad ? 45 : 26))
                                 .foregroundStyle(Colors.shared.primaryColor)
                                 .multilineTextAlignment(.leading)
                             
                             Text("Effortlessly erase backgrounds using AI. Perfect for portraits, products, or profile pics — get a clean cutout in seconds, no manual editing needed.")
-                                .font(.custom(Fonts.shared.interRegular, size: 17))
+                                .font(.custom(Fonts.shared.interRegular, size: isIpad ? 21 : 17))
                                 .foregroundStyle(.black.opacity(0.7))
                                 .padding(.top, 4)
                                 .multilineTextAlignment(.leading)
                         }
-                        .padding(.horizontal, 38)
+                        .padding(.horizontal, screenWidth * 0.1)
                         .padding(.bottom, 30)
                     }
                     .padding(.top, -screenHeight * 0.33)
@@ -564,9 +564,9 @@ struct OnboardingView: View {
                 }) {
                     ZStack(alignment: .center) {
                         Text("Continue")
-                            .font(.custom(Fonts.shared.interSemibold, size: 20))
+                            .font(.custom(Fonts.shared.interSemibold, size: isIpad ? 24 : 20))
                             .foregroundStyle(Color.white)
-                            .padding(.vertical, 16)
+                            .padding(.vertical, isIpad ? 22 : 16)
                             .frame(maxWidth: .infinity)
                             .background(Colors.shared.primaryColor)
                             .cornerRadius(24)
@@ -582,7 +582,7 @@ struct OnboardingView: View {
                                 .padding(.trailing, 15)
                         }
                     }
-                    .padding(.horizontal, 37)
+                    .padding(.horizontal, isIpad ? 70 : 37)
                     .padding(.bottom, 20)
                 }
             }

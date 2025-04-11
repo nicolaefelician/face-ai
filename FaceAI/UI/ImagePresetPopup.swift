@@ -13,8 +13,6 @@ struct ImagePresetPopup: View {
             
             if !Consts.shared.hasTunedModel {
                 try await ImageAiApi.shared.tuneModel(preset: preset)
-                globalState.historyJobs.append(ImageJob())
-                
             } else {
                 try await ImageAiApi.shared.createGenerationQueue(preset: preset)
             }

@@ -96,7 +96,16 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                                 didReceive response: UNNotificationResponse) async {
         let userInfo = response.notification.request.content.userInfo
         
-        // TODO: decode the notification data
+        guard let jobId = userInfo["jobId"] as? String,
+              let stringType = userInfo["type"] as? String,
+              let type = GenerationType(rawValue: stringType.lowercased()) else {
+            print("❌ Invalid or missing data in notification payload.")
+            return
+        }
+        
+        try? await Task.sleep(nanoseconds: 500_000_000)
+        
+        GlobalState.shared.navigationPath.append(.imageFilter(jobId: jobId, type: type))
     }
 }
 

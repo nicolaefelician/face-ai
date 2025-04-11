@@ -33,8 +33,6 @@ final class GlobalState: ObservableObject {
     
     @Published var showMenu = false
     
-    @Published var isIpad: Bool = false
-    
     @Published var isLoading: Bool = false
     @Published var showQueuePopup: Bool = false
     
