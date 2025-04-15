@@ -8,66 +8,6 @@ struct HomeView: View {
     
     @StateObject private var viewModel = HomeViewModel()
     
-    private struct RetryingAsyncImage: View {
-        let url: URL
-        let size: CGSize
-        let maxRetries: Int
-        let retryDelay: TimeInterval
-        
-        @State private var retryCount = 0
-        @State private var reloadToken = UUID()
-        
-        var body: some View {
-            AsyncImage(url: urlWithToken) { phase in
-                switch phase {
-                case .empty:
-                    ProgressView()
-                        .frame(width: size.width, height: size.height)
-                    
-                case .success(let image):
-                    image
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: size.width, height: size.height)
-                        .cornerRadius(12)
-                        .clipped()
-                    
-                case .failure:
-                    Color.clear
-                        .onAppear {
-                            if retryCount < maxRetries {
-                                DispatchQueue.main.asyncAfter(deadline: .now() + retryDelay) {
-                                    retryCount += 1
-                                    reloadToken = UUID()
-                                }
-                            }
-                        }
-                        .overlay(
-                            Image(systemName: "photo.fill")
-                                .resizable()
-                                .scaledToFit()
-                                .foregroundColor(.gray)
-                                .frame(width: 50, height: 50)
-                                .frame(width: size.width, height: size.height)
-                                .background(Color(.systemGray5))
-                                .cornerRadius(12)
-                        )
-                    
-                @unknown default:
-                    EmptyView()
-                }
-            }
-        }
-        
-        private var urlWithToken: URL {
-            var components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
-            components.queryItems = (components.queryItems ?? []) + [
-                URLQueryItem(name: "reloadToken", value: reloadToken.uuidString)
-            ]
-            return components.url!
-        }
-    }
-    
     private func ongoingHeader() -> some View {
         HStack {
             Text("Ongoing generation")
@@ -269,7 +209,9 @@ struct HomeView: View {
                                     }) {
                                         RetryingAsyncImage(
                                             url: URL(string: preset.image)!,
-                                            size: preset.imageSize,
+                                            size: isIpad
+                                                ? CGSize(width: preset.imageSize.width * 2, height: preset.imageSize.height * 2)
+                                                : preset.imageSize,
                                             maxRetries: 3,
                                             retryDelay: 1.5
                                         )
@@ -279,7 +221,7 @@ struct HomeView: View {
                             .padding(.horizontal, 25)
                         }
                         .padding(.bottom, 10)
-                        .frame(height: images.first?.imageSize.height ?? 150)
+                        .frame(height: isIpad ? (images.first?.imageSize.height ?? 150) * 2 : (images.first?.imageSize.height ?? 150))
                     }
                 }
                 .padding(.bottom)

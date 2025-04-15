@@ -28,7 +28,7 @@ final class ImageFilterViewModel: ObservableObject {
                 for urlString in urlStrings {
                     guard let url = URL(string: urlString) else { continue }
                     
-                    let (data, _) = try await URLSession.shared.data(from: url)
+                    let (data, _) = try await safeSession().data(from: url)
                     
                     if let image = UIImage(data: data) {
                         loadedImages.append(image)

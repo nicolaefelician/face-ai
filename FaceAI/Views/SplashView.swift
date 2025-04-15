@@ -40,13 +40,9 @@ struct SplashView: View {
                     try await UserApi.shared.fetchEnhanceJobs()
                     try await UserApi.shared.fetchUserCredits()
                     
-                    if !globalState.showOnboarding {
-                        requestForAuthorizationIfNecessary()
-                    }
+                    requestForAuthorizationIfNecessary()
                     
                     JobFetcher.shared.startWatcher()
-                    
-                    try await Task.sleep(nanoseconds: 1_000_000_000)
                 } catch {
                     print("❌ Failed to fetch jobs: \(error)")
                 }

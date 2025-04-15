@@ -75,7 +75,7 @@ struct ImagePresetPopup: View {
                         .font(.custom(Fonts.shared.interRegular, size: 17))
                         .foregroundStyle(.black.opacity(0.7))
                         .multilineTextAlignment(.center)
-                        .padding(.horizontal, 28)
+                        .padding(.horizontal, isIpad ? 90 : 28)
                         .padding(.top)
                     
                     Button(action: {
@@ -95,7 +95,7 @@ struct ImagePresetPopup: View {
                             .padding()
                             .background(Colors.shared.primaryColor)
                             .cornerRadius(12)
-                            .padding(.horizontal, 24)
+                            .padding(.horizontal, isIpad ? 90 : 24)
                     }
                     
                     Button(action: {

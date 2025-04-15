@@ -29,6 +29,8 @@ struct PromptsView: View {
     }
     
     var body: some View {
+        let screenWidth = UIScreen.main.bounds.width
+        
         ScrollView {
             LazyVStack {
                 HStack {
@@ -104,28 +106,12 @@ struct PromptsView: View {
                                                 globalState.showPresetPreview = true
                                             }
                                         }) {
-                                            AsyncImage(url: URL(string: preset.image)!) { phase in
-                                                if phase.error != nil {
-                                                    Image(systemName: "photo.fill")
-                                                        .resizable()
-                                                        .scaledToFit()
-                                                        .foregroundColor(.gray)
-                                                        .frame(width: 50, height: 50)
-                                                        .frame(width: imageWidth, height: imageHeight)
-                                                        .background(Color(.systemGray5))
-                                                        .cornerRadius(15)
-                                                } else if let image = phase.image {
-                                                    image
-                                                        .resizable()
-                                                        .scaledToFill()
-                                                        .frame(width: imageWidth, height: imageHeight)
-                                                        .cornerRadius(15)
-                                                        .clipped()
-                                                } else {
-                                                    ProgressView()
-                                                        .frame(width: imageWidth, height: imageHeight)
-                                                }
-                                            }
+                                            RetryingAsyncImage(
+                                                url: URL(string: preset.image)!,
+                                                size: CGSize(width: imageWidth, height: imageHeight),
+                                                maxRetries: 3,
+                                                retryDelay: 1
+                                            )
                                         }
                                     }
                                 }
@@ -151,36 +137,20 @@ struct PromptsView: View {
                                             globalState.showPresetPreview = true
                                         }
                                     }) {
-                                        AsyncImage(url: URL(string: preset.image)) { phase in
-                                            Group {
-                                                if let image = phase.image {
-                                                    image
-                                                        .resizable()
-                                                        .scaledToFill()
-                                                } else if phase.error != nil {
-                                                    ZStack {
-                                                        Color(.systemGray5)
-                                                        Image(systemName: "exclamationmark.triangle.fill")
-                                                            .foregroundColor(.orange)
-                                                            .font(.system(size: 30))
-                                                    }
-                                                } else {
-                                                    ZStack {
-                                                        Color(.systemGray5)
-                                                        ProgressView()
-                                                    }
-                                                }
-                                            }
-                                            .frame(width: itemWidth, height: 240)
-                                            .clipped()
-                                            .cornerRadius(16)
-                                        }
+                                        RetryingAsyncImage(
+                                            url: URL(string: preset.image)!,
+                                            size: isIpad
+                                                ? CGSize(width: itemWidth, height: 240 * 2)
+                                                : CGSize(width: itemWidth, height: 240),
+                                            maxRetries: 3,
+                                            retryDelay: 1
+                                        )
                                     }
                                 }
                             }
                         }
                     }
-                    .padding(.horizontal, 25)
+                    .padding(.horizontal, screenWidth * 0.02)
                     .padding(.vertical)
                 }
             }

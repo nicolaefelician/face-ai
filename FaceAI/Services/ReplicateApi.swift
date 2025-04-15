@@ -35,7 +35,7 @@ final class ReplicateApi {
         
         request.httpBody = body
         
-        let (data, response) = try await URLSession.shared.data(for: request)
+        let (data, response) = try await safeSession().data(for: request)
         
         if let httpResponse = response as? HTTPURLResponse, !(200...299).contains(httpResponse.statusCode) {
             let errorMessage = String(data: data, encoding: .utf8) ?? "Unknown error"
@@ -58,7 +58,7 @@ final class ReplicateApi {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         
-        let (data, _) = try await URLSession.shared.data(for: request)
+        let (data, _) = try await safeSession().data(for: request)
         
         let decoded = try JSONDecoder().decode(EnhanceJob.self, from: data)
         

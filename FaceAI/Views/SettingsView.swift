@@ -11,6 +11,8 @@ struct SettingsView: View {
     let privacyPolicyUrl = "https://docs.google.com/document/d/1SkhgKKJOPVVyZSfsDd66ENzVKLK68Jdq_MfE1-IQ9oI/edit?usp=sharing"
     
     var body: some View {
+        let screenWidth = UIScreen.main.bounds.width
+        
         ScrollView {
             VStack(spacing: 20) {
                 Button(action: { rateApp() }) {
@@ -35,6 +37,7 @@ struct SettingsView: View {
             }
             .padding()
             .padding(.top, 15)
+            .padding(.horizontal, screenWidth * 0.02)
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {

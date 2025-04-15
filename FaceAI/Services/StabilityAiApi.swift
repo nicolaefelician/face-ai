@@ -37,7 +37,7 @@ final class StabilityAiApi {
         
         request.httpBody = body
         
-        let (data, response) = try await URLSession.shared.data(for: request)
+        let (data, response) = try await safeSession().data(for: request)
         
         if let httpResponse = response as? HTTPURLResponse, !(200...299).contains(httpResponse.statusCode) {
             print("❌ Status:", httpResponse.statusCode)

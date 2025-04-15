@@ -9,7 +9,7 @@ struct SavedImageCard: View {
                 Image(uiImage: uiImage)
                     .resizable()
                     .scaledToFill()
-                    .frame(height: 340)
+                    .frame(height: isIpad ? 500 : 340)
                     .frame(maxWidth: .infinity)
                     .clipped()
                     .cornerRadius(18)
@@ -71,6 +71,7 @@ struct SavedView: View {
                 .background(Color(hex: "#ebebeb"))
                 .cornerRadius(24)
                 .padding(.horizontal, 20)
+                .padding(.bottom, 10)
                 
                 if viewModel.filteredList.isEmpty {
                     VStack(spacing: 12) {

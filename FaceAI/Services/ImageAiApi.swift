@@ -79,7 +79,7 @@ final class ImageAiApi {
         
         request.httpBody = httpBody
         
-        let (data, response) = try await URLSession.shared.data(for: request)
+        let (data, response) = try await safeSession().data(for: request)
         
         if let stringData = String(data: data, encoding: .utf8) {
             print("Response body: \(stringData)")
@@ -115,7 +115,7 @@ final class ImageAiApi {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         
-        let (data, response) = try await URLSession.shared.data(for: request)
+        let (data, response) = try await safeSession().data(for: request)
         
         if let httpResponse = response as? HTTPURLResponse {
             print("Status code: \(httpResponse.statusCode)")

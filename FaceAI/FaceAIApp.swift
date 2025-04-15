@@ -6,9 +6,9 @@ import SuperwallKit
 
 final class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        Consts.shared.loadConfig()
-        
         FirebaseApp.configure()
+        
+        Consts.shared.loadConfig()
         
         Purchases.logLevel = .debug
         Purchases.configure(withAPIKey: Consts.shared.revenueCatApiKey, appUserID: Consts.shared.userId?.uuidString)

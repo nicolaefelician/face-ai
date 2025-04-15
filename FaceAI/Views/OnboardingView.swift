@@ -30,7 +30,9 @@ struct OnboardingView: View {
     @ObservedObject private var globalState = GlobalState.shared
     
     private func genderPickerPage() -> some View {
-        VStack {
+        let screenWidth = UIScreen.main.bounds.width
+
+        return VStack {
             Image("gender")
                 .resizable()
                 .scaledToFit()
@@ -80,6 +82,7 @@ struct OnboardingView: View {
             }
             .padding()
             .padding(.top)
+            .padding(.horizontal, screenWidth * 0.04)
             
             Spacer()
             
@@ -186,12 +189,13 @@ struct OnboardingView: View {
     
     private func faceProcessingPage() -> some View {
         let screenHeight = UIScreen.main.bounds.height
+        let screenWidth = UIScreen.main.bounds.width
         
         return VStack(alignment: .leading) {
             Text("Face Processing")
                 .font(.custom(Fonts.shared.interSemibold, size: 28))
                 .padding(.top, screenHeight * 0.03)
-                .padding(.horizontal, 37)
+                .padding(.horizontal, isIpad ? 70 : 38)
             
             Text("To continue, please upload 8 images of yourself.")
                 .font(.custom(Fonts.shared.interRegular, size: 17))
@@ -199,7 +203,7 @@ struct OnboardingView: View {
                 .multilineTextAlignment(.leading)
                 .padding(.top, 4)
                 .padding(.bottom, 15)
-                .padding(.horizontal, 37)
+                .padding(.horizontal, isIpad ? 70 : 38)
             
             PhotosPicker(
                 selection: $viewModel.selectedItems,
@@ -222,7 +226,7 @@ struct OnboardingView: View {
                 .padding(.vertical, 30)
                 .background(Color(hex: "#ebebeb"))
                 .cornerRadius(12)
-                .padding(.horizontal, 37)
+                .padding(.horizontal, isIpad ? 70 : 38)
             }
             .onChange(of: viewModel.selectedItems) { newItems in
                 Task {
@@ -262,14 +266,17 @@ struct OnboardingView: View {
                         Image(uiImage: viewModel.selectedImages[index])
                             .resizable()
                             .scaledToFill()
-                            .frame(width: 300, height: 360)
+                            .frame(width: screenWidth * 0.5, height: screenHeight * 0.33)
                             .cornerRadius(17)
                             .shadow(radius: 5)
                             .tag(index)
                     }
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                .frame(height: 380)
+                .frame(height: screenHeight * 0.35)
+                .padding(.top, screenHeight * 0.05)
+                
+                Spacer()
                 
                 HStack {
                     ForEach(0..<viewModel.selectedImages.count, id: \.self) { index in
@@ -395,7 +402,7 @@ struct OnboardingView: View {
                                     endPoint: .bottom
                                 )
                                 .frame(height: screenHeight * 0.17)
-                                .padding(.top, 60)
+                                .padding(.top, screenHeight * 0.05)
                                 
                                 Spacer()
                             }
@@ -414,7 +421,7 @@ struct OnboardingView: View {
                                     startPoint: .bottom,
                                     endPoint: .top
                                 )
-                                .frame(height: 150)
+                                .frame(height: screenHeight * 0.13)
                             }
                         }
                         
@@ -487,7 +494,6 @@ struct OnboardingView: View {
                                 )
                                 .frame(height: 90)
                             }
-                            .padding(.bottom, 45)
                         }
                         
                         VStack(alignment: .leading) {
@@ -518,10 +524,10 @@ struct OnboardingView: View {
                     VStack {
                         GifView("onboarding3")
                             .scaledToFill()
-                            .frame(height: screenHeight * 0.7)
+                            .frame(height: screenHeight * 0.45)
                             .frame(width: screenWidth)
                             .clipped()
-                            .padding(.top, screenHeight * 0.10)
+                            .padding(.top, screenHeight * 0.475)
                         
                         Spacer()
                         

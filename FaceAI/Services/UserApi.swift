@@ -9,25 +9,7 @@ final class UserApi {
         let credits: Int
     }
     
-    func addCredits(_ credits: Int) async throws {
-        guard let userId = Consts.shared.userId else {
-            throw ApiError.invalidResponse(message: "User ID not found")
-        }
-        
-        guard let url = URL(string: "\(Consts.shared.apiBaseUrl)/api/revenuecat/set-credits-after-purchase?userId=\(userId.uuidString)&credits=\(credits)") else {
-            throw URLError(.badURL)
-        }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        
-        let (_, response) = try await URLSession.shared.data(for: request)
-        
-        if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode != 200 {
-            throw ApiError.invalidResponse(message: "Failed to fetch credits")
-        }
-    }
-    
+    @MainActor
     func fetchUserCredits() async throws {
         guard let userId = Consts.shared.userId else {
             throw ApiError.invalidResponse(message: "User ID not found")
@@ -40,7 +22,7 @@ final class UserApi {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         
-        let (data, response) = try await URLSession.shared.data(for: request)
+        let (data, response) = try await safeSession().data(for: request)
         
         if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode != 200 {
             throw ApiError.invalidResponse(message: "Failed to fetch credits")
@@ -79,7 +61,7 @@ final class UserApi {
         let jsonData = try JSONSerialization.data(withJSONObject: body, options: [])
         request.httpBody = jsonData
         
-        let (_, response) = try await URLSession.shared.data(for: request)
+        let (_, response) = try await safeSession().data(for: request)
         
         if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode != 200 {
             throw ApiError.invalidResponse(message: "The server returned an error code: \(httpResponse.statusCode)")
@@ -91,7 +73,7 @@ final class UserApi {
     func getJobImages(jobId: String) async throws -> [String] {
         guard let url = URL(string: "\(Consts.shared.apiBaseUrl)/api/job/list-job-images?jobId=\(jobId)") else { throw URLError(.badURL) }
         
-        let (data, _) = try await URLSession.shared.data(from: url)
+        let (data, _) = try await safeSession().data(from: url)
         let decoded = try JSONDecoder().decode([String].self, from: data)
         
         return decoded
@@ -108,7 +90,7 @@ final class UserApi {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         
-        let (data, _) = try await URLSession.shared.data(for: request)
+        let (data, _) = try await safeSession().data(for: request)
         let decoded = try JSONDecoder().decode([ImageJob].self, from: data)
         
         DispatchQueue.main.async {
@@ -124,7 +106,7 @@ final class UserApi {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         
-        let (data, response) = try await URLSession.shared.data(for: request)
+        let (data, response) = try await safeSession().data(for: request)
         
         if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode != 200 {
             print("Failed to fetch enhance images. Status code: \(httpResponse.statusCode)")
@@ -149,7 +131,7 @@ final class UserApi {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         
-        let (data, _) = try await URLSession.shared.data(for: request)
+        let (data, _) = try await safeSession().data(for: request)
         
         let decoded = try JSONDecoder().decode([EnhanceJob].self, from: data)
         
