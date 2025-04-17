@@ -15,7 +15,9 @@ final class StabilityAiApi {
             throw URLError(.badURL)
         }
         
-        guard let imageData = image.jpegData(compressionQuality: 0.9) else {
+        let resizedImage = image.resizedToFit(maxPixels: 4_000_000)
+        
+        guard let imageData = resizedImage.jpegData(compressionQuality: 0.9) else {
             throw ApiError.invalidResponse(message: "Failed to convert image to JPEG")
         }
         

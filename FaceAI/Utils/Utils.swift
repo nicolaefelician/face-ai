@@ -146,3 +146,23 @@ func safeSession() -> URLSession {
         return URLSession.shared
     }
 }
+
+extension UIImage {
+    func resizedToFit(maxPixels: Int) -> UIImage {
+        let originalWidth = size.width
+        let originalHeight = size.height
+        let totalPixels = originalWidth * originalHeight
+        
+        guard totalPixels > CGFloat(maxPixels) else { return self }
+
+        let scaleFactor = sqrt(CGFloat(maxPixels) / totalPixels)
+        let newSize = CGSize(width: originalWidth * scaleFactor, height: originalHeight * scaleFactor)
+
+        UIGraphicsBeginImageContextWithOptions(newSize, true, 1.0)
+        draw(in: CGRect(origin: .zero, size: newSize))
+        let resized = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        return resized ?? self
+    }
+}

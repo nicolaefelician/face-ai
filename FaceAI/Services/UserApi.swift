@@ -70,6 +70,23 @@ final class UserApi {
         print("✅ User registered successfully")
     }
     
+    func addCredits(_ count: Int) async throws {
+        guard let userId = Consts.shared.userId else {
+            throw ApiError.invalidResponse(message: "User ID not found")
+        }
+        
+        guard let url = URL(string: "\(Consts.shared.apiBaseUrl)/api/user/add-credits?userId=\(userId.uuidString)&credits=\(count)") else { throw URLError(.badURL) }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        let (_, response) = try await safeSession().data(for: request)
+        
+        if let httpRequest = response as? HTTPURLResponse, httpRequest.statusCode != 200 {
+            print("Succesfuly added \(count) credits")
+        }
+    }
+    
     func getJobImages(jobId: String) async throws -> [String] {
         guard let url = URL(string: "\(Consts.shared.apiBaseUrl)/api/job/list-job-images?jobId=\(jobId)") else { throw URLError(.badURL) }
         

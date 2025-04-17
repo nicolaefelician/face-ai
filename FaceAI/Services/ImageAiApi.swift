@@ -18,14 +18,16 @@ final class ImageAiApi {
         boundary: String,
         gender: String,
         prompt: String,
-        presetCategory: String
+        presetCategory: String,
+        userId: String
     ) -> Data {
         var body = Data()
         
         let params: [String: String] = [
             "gender": gender,
             "prompt": prompt,
-            "presetCategory": presetCategory
+            "presetCategory": presetCategory,
+            "userId": userId
         ]
         
         for (key, value) in params {
@@ -65,7 +67,7 @@ final class ImageAiApi {
             throw ApiError.invalidResponse(message: "User id must be set")
         }
         
-        guard let url = URL(string: "\(Consts.shared.apiBaseUrl)/api/image/tune-model?userId=\(userId)") else {
+        guard let url = URL(string: "\(Consts.shared.apiBaseUrl)/api/image/tune-model") else {
             throw ApiError.invalidResponse(message: "Url is invalid")
         }
         
@@ -75,7 +77,7 @@ final class ImageAiApi {
         let boundary = "Boundary-\(UUID().uuidString)"
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         
-        let httpBody = createMultipartBody(images: Consts.shared.uploadedImages, boundary: boundary, gender: gender, prompt: preset.systemPrompt, presetCategory: preset.category.rawValue)
+        let httpBody = createMultipartBody(images: Consts.shared.uploadedImages, boundary: boundary, gender: gender, prompt: preset.systemPrompt, presetCategory: preset.category.rawValue, userId: userId.uuidString)
         
         request.httpBody = httpBody
         
@@ -106,27 +108,34 @@ final class ImageAiApi {
             throw ApiError.invalidResponse(message: "User ID is required")
         }
         
-        let encodedPrompt = preset.systemPrompt.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-        
-        guard let url = URL(string: "\(Consts.shared.apiBaseUrl)/api/image/generate-headshot?userId=\(userId)&prompt=\(encodedPrompt)&presetCategory=\(preset.category.rawValue)") else {
+        guard let url = URL(string: "\(Consts.shared.apiBaseUrl)/api/image/generate-headshot") else {
             throw URLError(.badURL)
         }
-        
+
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let body: [String: Any] = [
+            "userId": userId.uuidString,
+            "prompt": preset.systemPrompt,
+            "presetCategory": preset.category.rawValue
+        ]
+
+        request.httpBody = try JSONSerialization.data(withJSONObject: body)
+
         let (data, response) = try await safeSession().data(for: request)
-        
+
         if let httpResponse = response as? HTTPURLResponse {
             print("Status code: \(httpResponse.statusCode)")
         }
-        
+
         if let jsonString = String(data: data, encoding: .utf8) {
             print("JSON string: \(jsonString)")
         }
-        
+
         let job = try JSONDecoder().decode(ImageJob.self, from: data)
-        
+
         DispatchQueue.main.async {
             GlobalState.shared.historyJobs.append(job)
             JobFetcher.shared.startWatcher()

@@ -24,7 +24,7 @@ struct EnhanceJobCard: View {
                     }
                 }
                 
-                if job.status != .successful {
+                if job.status == .processing {
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle(tint: .gray))
                         .scaleEffect(0.9)

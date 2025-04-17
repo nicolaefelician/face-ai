@@ -18,13 +18,15 @@ final class JobFetcher {
                 do {
                     var shouldContinue = false
                     
+                    try await UserApi.shared.fetchUserJobs()
+                    
                     if globalState.historyJobs.contains(where: { $0.status == .processing }) {
-                        try await UserApi.shared.fetchUserJobs()
                         shouldContinue = true
                     }
                     
+                    try await UserApi.shared.fetchEnhanceJobs()
+                    
                     if globalState.enhanceJobs.contains(where: { $0.status == .processing }) {
-                        try await UserApi.shared.fetchEnhanceJobs()
                         shouldContinue = true
                     }
                     

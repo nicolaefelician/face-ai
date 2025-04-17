@@ -34,6 +34,17 @@ struct SettingsView: View {
                 Button(action: { openUrl(termsOfUseUrl) }) {
                     SettingsButtonView(title: "Terms of Use", icon: "doc.text", iconColor: .orange)
                 }
+                
+                if !GlobalState.shared.isProUser {
+                    Button(action: {
+                        Task {
+                            let result = await purchaseController.restorePurchases()
+                            print("Restore result: \(result)")
+                        }
+                    }) {
+                        SettingsButtonView(title: "Restore Purchases", icon: "arrow.clockwise", iconColor: .gray)
+                    }
+                }
             }
             .padding()
             .padding(.top, 15)
@@ -56,6 +67,18 @@ struct SettingsView: View {
         .background(Color.white)
         .navigationTitle("Settings")
         .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    private func restorePurchases() {
+        Task {
+            let result = await purchaseController.restorePurchases()
+            switch result {
+            case .restored:
+                print("✅ Purchases restored")
+            case .failed(let error):
+                print("❌ Failed to restore purchases: \(String(describing: error?.localizedDescription))")
+            }
+        }
     }
     
     private func contactUs() {

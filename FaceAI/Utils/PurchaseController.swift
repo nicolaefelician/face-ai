@@ -79,10 +79,38 @@ final class SubscriptionController: PurchaseController  {
     /// This gets called when someone tries to restore purchases on one of your paywalls.
     func restorePurchases() async -> RestorationResult {
         do {
-            _ = try await Purchases.shared.restorePurchases()
-            GlobalState.shared.isProUser = true
+            let customerInfo = try await Purchases.shared.restorePurchases()
+            let entitlements = customerInfo.entitlements.active
+            
+            GlobalState.shared.isProUser = !entitlements.isEmpty
+            
+            var alreadyRestoredIds = UserDefaults.standard.array(forKey: "restoredProductIds") as? [String] ?? []
+            
+            for (_, entitlement) in entitlements {
+                let productId = entitlement.productIdentifier
+                
+                // Only grant credits if this product hasn't already been restored
+                if !alreadyRestoredIds.contains(productId) {
+                    switch productId {
+                    case "com.face.ai.weekly":
+                        try? await UserApi.shared.addCredits(200)
+                        GlobalState.shared.credits += 200
+                    case "com.face.ai.monthly":
+                        try? await UserApi.shared.addCredits(1000)
+                        GlobalState.shared.credits += 1000
+                    default:
+                        break
+                    }
+                    
+                    alreadyRestoredIds.append(productId)
+                }
+            }
+            
+            // Save updated restored product IDs
+            UserDefaults.standard.set(alreadyRestoredIds, forKey: "restoredProductIds")
+            
             return .restored
-        } catch let error {
+        } catch {
             return .failed(error)
         }
     }

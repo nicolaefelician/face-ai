@@ -7,11 +7,13 @@ final class ReplicateApi {
     private init() {}
     
     func uploadImage(_ uiImage: UIImage) async throws -> String {
-        guard let url = URL(string: "\(Consts.shared.apiBaseUrl)/api/replicate/upload-image") else {
+        guard let url = URL(string: "\(Consts.shared.apiBaseUrl)/api/file/upload-file") else {
             throw URLError(.badURL)
         }
         
-        guard let imageData = uiImage.jpegData(compressionQuality: 0.9) else {
+        let resizedImage = uiImage.resizedToFit(maxPixels: 2_000_000)
+        
+        guard let imageData = resizedImage.pngData() else {
             throw ApiError.invalidResponse(message: "Failed to convert UIImage to Data")
         }
         
@@ -22,8 +24,8 @@ final class ReplicateApi {
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         
         var body = Data()
-        let filename = "image.jpg"
-        let mimeType = "image/jpeg"
+        let filename = "image.png"
+        let mimeType = "image/png"
         
         body.append("--\(boundary)\r\n")
         body.append("Content-Disposition: form-data; name=\"file\"; filename=\"\(filename)\"\r\n")
@@ -43,7 +45,8 @@ final class ReplicateApi {
         }
         
         let result = try JSONDecoder().decode([String: String].self, from: data)
-        guard let imageUrl = result["imageUrl"] else {
+        
+        guard let imageUrl = result["fileUrl"] else {
             throw NSError(domain: "uploadImage", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid server response"])
         }
         

@@ -42,7 +42,7 @@ struct QueuePopup: View {
             .background(Color.white)
             .cornerRadius(20)
             .shadow(radius: 25)
-            .padding(.horizontal, 40)
+            .padding(.horizontal, isIpad ? 150 : 40)
         }
         .transition(.opacity)
     }

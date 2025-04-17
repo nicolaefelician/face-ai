@@ -15,11 +15,23 @@ final class ImageFilterViewModel: ObservableObject {
         do {
             if type == .filter {
                 let enhanceImages = try await UserApi.shared.getEnhanceJobImages(jobId: jobId)
-                let loadedImages = enhanceImages.compactMap { imageFromBase64String($0.data) }
+                
+                var loadedImages: [UIImage] = []
+                
+                for image in enhanceImages {
+                    guard let url = URL(string: image.imageUrl) else { continue }
+                    
+                    let (data, _) = try await safeSession().data(from: url)
+                    
+                    if let image = UIImage(data: data) {
+                        loadedImages.append(image)
+                    }
+                }
                 
                 DispatchQueue.main.async {
                     self.images = loadedImages
                 }
+                self.images = loadedImages
             } else {
                 let urlStrings = try await UserApi.shared.getJobImages(jobId: jobId)
                 

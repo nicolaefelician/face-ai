@@ -21,25 +21,33 @@ struct ImageFilterView: View {
                     .padding(.top, 100)
                 Spacer()
             } else {
-                TabView(selection: $viewModel.selectedImageIndex) {
-                    ForEach(Array(viewModel.images.enumerated()), id: \.offset) { index, image in
-                        Button(action: {
-                            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                            globalState.selectedImage = image
-                            globalState.showFullscreenImage = true
-                        }) {
-                            Image(uiImage: image)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 330, height: 400)
-                                .cornerRadius(13)
-                                .padding(.bottom)
+                GeometryReader { geometry in
+                    TabView(selection: $viewModel.selectedImageIndex) {
+                        ForEach(Array(viewModel.images.enumerated()), id: \.offset) { index, image in
+                            Button(action: {
+                                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                                globalState.selectedImage = image
+                                globalState.showFullscreenImage = true
+                            }) {
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(
+                                        width: min(geometry.size.width * 0.6, 500),
+                                        height: min(geometry.size.height * 0.6, 500)
+                                    )
+                                    .background(Color.white)
+                                    .cornerRadius(18)
+                                    .shadow(color: Color.black.opacity(0.1), radius: 12, x: 0, y: 6)
+                                    .padding(.horizontal, 20)
+                                    .padding(.bottom, 10)
+                            }
                         }
                     }
+                    .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                    .frame(height: min(geometry.size.height * 0.7, 550))
+                    .padding(.vertical, 20)
                 }
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                .frame(height: 500)
-                .padding(.vertical)
                 
                 if viewModel.images.count > 1 {
                     HStack {
