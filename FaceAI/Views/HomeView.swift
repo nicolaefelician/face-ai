@@ -187,6 +187,91 @@ struct HomeView: View {
                         }
                     }
                     
+                    HStack {
+                        Text("Ghibli Style")
+                            .font(.custom(Fonts.shared.instrumentSansSemibold, size: 22))
+                            .foregroundStyle(.black)
+                        Spacer()
+                    }
+                    .padding(25)
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        PhotosPicker(
+                            selection: $viewModel.selectedItem,
+                            matching: .images,
+                            photoLibrary: .shared()
+                        ) {
+                            HStack(spacing: 7.5) {
+                                ForEach(ghibliImages, id: \.self) { imageUrl in
+                                    RetryingAsyncImage(
+                                        url: imageUrl,
+                                        size: CGSize(width: isIpad ? 115 * 2 : 115, height: isIpad ? 165 * 2 : 165),
+                                        maxRetries: 3,
+                                        retryDelay: 1.5
+                                    )
+                                }
+                            }
+                            .padding(.horizontal, 25)
+                        }
+                        .onChange(of: viewModel.selectedItem) { newItem in
+                            guard let newItem = newItem else { return }
+                            
+                            Task {
+                                if let data = try? await newItem.loadTransferable(type: Data.self),
+                                   let uiImage = UIImage(data: data) {
+                                    withAnimation {
+                                        globalState.selectedFilterType = .ghibli
+                                        globalState.selectedImage = uiImage
+                                        globalState.showImageFilter = true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .padding(.bottom, 10)
+                    .frame(height: isIpad ? 165 * 2 : 165)
+                    
+                    HStack {
+                        Text("Action Figure")
+                            .font(.custom(Fonts.shared.instrumentSansSemibold, size: 22))
+                            .foregroundStyle(.black)
+                        Spacer()
+                    }
+                    .padding(25)
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 7.5) {
+                            ForEach(actionFigures, id: \.self) { imageUrl in
+                                Button(action: {
+                                    Task {
+                                        do {
+                                            let (imageData, _) = try await safeSession().data(from: imageUrl)
+                                            
+                                            let image = UIImage(data: imageData)
+                                            
+                                            withAnimation {
+                                                globalState.selectedImage = image
+                                                globalState.showActionFigurePopup = true
+                                            }
+                                        } catch {
+                                            print("\(error.localizedDescription)")
+                                        }
+                                    }
+                                }) {
+                                    RetryingAsyncImage(
+                                        url: imageUrl,
+                                        size: CGSize(width: isIpad ? 115 * 2 : 115, height: isIpad ? 165 * 2 : 165),
+                                        maxRetries: 3,
+                                        retryDelay: 1.5
+                                    )
+                                }
+                            }
+                        }
+                        .padding(.horizontal, 25)
+                    }
+                    .padding(.bottom, 10)
+                    .frame(height: isIpad ? 165 * 2 : 165)
+                    
                     ForEach(PresetCategory.allCases) { category in
                         let images = imagePresets.filter { $0.category == category }
                         

@@ -68,6 +68,7 @@ enum EnhanceStatus: String, Codable {
 enum FilterType: Codable {
     case enhance
     case removeBackground
+    case ghibli
 }
 
 enum GenerationType: String, CaseIterable, Codable {

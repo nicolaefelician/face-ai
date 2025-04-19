@@ -3,10 +3,10 @@ import SwiftUI
 struct ImageJobCard: View {
     let job: ImageJob
     let showDate: Bool
-
+    
     @State private var imageURLs: [URL] = []
     @ObservedObject private var globalState = GlobalState.shared
-
+    
     private func loadImages() {
         if let data = job.images.data(using: .utf8) {
             do {
@@ -17,20 +17,19 @@ struct ImageJobCard: View {
             }
         }
     }
-
+    
     private var formattedDate: String {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         formatter.timeStyle = .short
         return formatter.string(from: job.creationDate)
     }
-
+    
     var body: some View {
         GeometryReader { geo in
-            let isWide = geo.size.width > 700
-            let imageWidth = isWide ? geo.size.width * 0.22 : 115.0
-            let imageHeight = isWide ? geo.size.width * 0.3 : 165.0
-
+            let imageWidth = isIpad ? 115 * 2 : 115.0
+            let imageHeight = isIpad ? 165 * 2 : 165.0
+            
             Button(action: {
                 UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                 if job.status == .complete {
@@ -45,9 +44,9 @@ struct ImageJobCard: View {
                             .padding(.horizontal, 10)
                             .background(Color.gray.opacity(0.1))
                             .clipShape(RoundedRectangle(cornerRadius: 8))
-
+                        
                         Spacer()
-
+                        
                         if showDate {
                             Text(formattedDate)
                                 .font(.custom(Fonts.shared.interRegular, size: 13))
@@ -66,7 +65,7 @@ struct ImageJobCard: View {
                         }
                     }
                     .padding(.horizontal, 25)
-
+                    
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 12) {
                             if imageURLs.isEmpty {
@@ -108,6 +107,6 @@ struct ImageJobCard: View {
             }
             .buttonStyle(PlainButtonStyle())
         }
-        .frame(height: 300)
+        .frame(height: isIpad ? 200 * 2 : 200)
     }
 }

@@ -89,7 +89,6 @@ final class SubscriptionController: PurchaseController  {
             for (_, entitlement) in entitlements {
                 let productId = entitlement.productIdentifier
                 
-                // Only grant credits if this product hasn't already been restored
                 if !alreadyRestoredIds.contains(productId) {
                     switch productId {
                     case "com.face.ai.weekly":

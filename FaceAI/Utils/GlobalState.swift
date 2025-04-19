@@ -31,6 +31,7 @@ final class GlobalState: ObservableObject {
     @Published var selectedFilterType: FilterType = .enhance
     @Published var selectedImageUrl: URL?
     
+    @Published var showActionFigurePopup: Bool = false
     @Published var showMenu = false
     
     @Published var isLoading: Bool = false

@@ -53,6 +53,24 @@ final class ReplicateApi {
         return imageUrl
     }
     
+    func createGhibliPrediction(imageUrl: String) async throws {
+        guard let userId = Consts.shared.userId else { throw NSError(domain: "User ID not set", code: 0, userInfo: nil) }
+        
+        guard let url = URL(string: "\(Consts.shared.apiBaseUrl)/api/replicate/create-ghibli-prediction?imageUrl=\(imageUrl)&userId=\(userId)") else { throw URLError(.badURL) }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        let (data, _) = try await safeSession().data(for: request)
+        
+        let decoded = try JSONDecoder().decode(EnhanceJob.self, from: data)
+        
+        DispatchQueue.main.async {
+            GlobalState.shared.enhanceJobs.append(decoded)
+            JobFetcher.shared.startWatcher()
+        }
+    }
+    
     func createPrediction(imageUrl: String) async throws {
         guard let userId = Consts.shared.userId else { throw NSError(domain: "User ID not set", code: 0, userInfo: nil) }
         

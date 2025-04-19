@@ -114,6 +114,8 @@ struct ContentView: View {
                 ImagePresetPopup()
             } else if globalState.showImageFilter {
                 ImageFilterPopup()
+            } else if globalState.showActionFigurePopup {
+                ActionFigurePopup()
             } else if globalState.isLoading {
                 ZStack {
                     Color.white

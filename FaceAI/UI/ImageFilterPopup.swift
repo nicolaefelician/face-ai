@@ -45,6 +45,18 @@ struct ImageFilterPopup: View {
                     let job = try await StabilityAiApi.shared.removeBackground(image: uiImage)
                     globalState.credits -= 5
                     globalState.navigationPath.append(.imageFilter(jobId: job.id, type: .filter))
+                case .ghibli:
+                    withAnimation {
+                        globalState.isLoading = true
+                        globalState.showImageFilter = false
+                    }
+                    let imageUrl = try await ReplicateApi.shared.uploadImage(uiImage)
+                    
+                    try await ReplicateApi.shared.createGhibliPrediction(imageUrl: imageUrl)
+                    
+                    withAnimation {
+                        globalState.showQueuePopup = true
+                    }
                 }
             } catch {
                 globalState.alertTitle = "Error"
@@ -58,6 +70,7 @@ struct ImageFilterPopup: View {
             }
             
             isProcessing = false
+            globalState.selectedFilterType = .enhance
         }
     }
     
@@ -67,6 +80,8 @@ struct ImageFilterPopup: View {
             return "Enhance this image to improve clarity and resolution. This action will cost 10 credits."
         case .removeBackground:
             return "Remove the background from this image. This action will cost 5 credits."
+        case .ghibli:
+            return "Apply a Ghibli-style effect to this image. This action will cost 10 credits."
         }
     }
     
@@ -77,6 +92,7 @@ struct ImageFilterPopup: View {
                 .ignoresSafeArea()
                 .onTapGesture {
                     withAnimation {
+                        globalState.selectedFilterType = .enhance
                         globalState.showImageFilter = false
                     }
                 }
@@ -108,6 +124,7 @@ struct ImageFilterPopup: View {
                     HStack(spacing: 20) {
                         Button("Cancel") {
                             withAnimation {
+                                globalState.selectedFilterType = .enhance
                                 globalState.showImageFilter = false
                             }
                         }

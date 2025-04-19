@@ -40,3 +40,17 @@ let imagePresets: [ImagePreset] = [
     ImagePreset(image: "https://sdbooth2-production.s3.amazonaws.com/35hav9vhzw5l7eai3lb3d5x4dcgb", systemPrompt: "A sks \(Consts.shared.selectedGender ?? "") with a shredded, aesthetic physique strikes the iconic Zyzz pose, arms raised behind the head in a powerful display. Every muscle group is sharply defined — from deep-cut abs to vascular shoulders and a full, sculpted chest. The dramatic V-taper highlights a narrow waist and wide, chiseled lats. Intense lighting casts deep shadows across the body, emphasizing muscle fibers and vein structure with cinematic clarity. The background is minimal or softly graded, keeping all focus on the peak-conditioned form and confident energy of elite fitness.", category: .gym),
     ImagePreset(image: "https://sdbooth2-production.s3.amazonaws.com/eea11bfn1v9wss0lvivc0omc0fmq", systemPrompt: "A sks \(Consts.shared.selectedGender ?? "") is captured in a high-resolution, dynamic fitness portrait, standing in a sleek modern gym environment. Wearing workout clothes, this \(Consts.shared.selectedGender ?? "") displays a muscular and defined physique, with droplets of sweat glistening on the skin under vivid, directional lighting. Weightlifting equipment fills the blurred background, while sharp focus and intense composition highlight raw strength, focus, and determination. The image feels editorial and aspirational — the kind of portrait trending on top fitness and health magazines.", category: .gym)
 ]
+
+let ghibliImages: [URL] = [URL(string: "https://ofiles.kitety.com/ghibli/landingpage/e56036c6-2160-4ef3-bb7d-d189e2eb8c41.webp")!,
+    URL(string: "https://www.myimg.ai/static/ghibli-style-ai-generator/ghibli-style-ai-generator-features-hd.webp")!,
+    URL(string: "https://images1.dnaindia.com/images/DNA-EN/900x1600/2025/3/29/1743263569718_3.png")!,
+    URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXoyTVkU4l9B5UPJsOYqWRpkAYD89qHOz8fHSEPTIhpkRelxa7mIBfxdS4Ps49d-Voo9Y&usqp=CAU")!
+]
+
+let actionFigures: [URL] = [
+    URL(string: "https://miro.medium.com/v2/resize:fit:666/1*eXoOtzu0mZoBa6jO5-jrvw.png")!,
+    URL(string: "https://media.licdn.com/dms/image/v2/D4E22AQGG2KgpuvHbQQ/feedshare-shrink_800/B4EZYHswJVGgAo-/0/1743885897431?e=2147483647&v=beta&t=QLFK5mHp33bks4Xc5JzEdRCJpZ8Dq-l-Y4Ssh8mVeYk")!,
+    URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmcAyNa0NzcUduYzH9XqkyRELfk6jzFin_4-dz53-yz7Xv2jbA2uVbLJzhMtrnASK6gd4&usqp=CAU")!,
+    URL(string: "https://s.yimg.com/ny/api/res/1.2/5qPqtcgNazZv11LtoNCH2Q--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTE0NDA-/https://media.zenfs.com/en/whtm_articles_902/27b3b98b21064e3aa4898f41feb38a9f")!,
+    URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxpZRGBlgjUN_Q1oTvrw83Nq0bPlLQ_YZ8S7j_VXOU2jCCTfJWEpYSLg7yPnDMfA8Lpn0&usqp=CAU")!
+]
