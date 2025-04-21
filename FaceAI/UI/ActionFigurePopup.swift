@@ -6,9 +6,11 @@ struct ActionFigurePopup: View {
     @State private var promptText: String = ""
     
     let systemPrompt = """
-    Create a clean, front-facing action figure blister pack of a sks male, preserving distinct facial features, hairstyle, and casual sporty outfit. The figure is posed upright and centered inside the packaging, with a confident expression.
-    The packaging is titled **"Agent AI"** in bold, futuristic font at the top. Accessories are arranged neatly to the side: a laptop, terminal window, AI chip, command-line coffee mug, wireless headphones, and a floating robot assistant.
-    Use a symmetrical, toy packaging style with smooth plastic casing and a matte cardboard background. Lighting should be soft and neutral. Avoid angled perspectives — make it look like a real-life boxed action figure, viewed directly from the front.
+    Create a clean, front-facing action figure blister pack of a realistic human character. Preserve distinct facial features, hairstyle, and clothing style. The figure should be posed upright and centered inside the packaging with a natural, confident expression.
+
+    Leave space at the top for a bold title (user-specified). Accessories should be arranged neatly to the side — based on the user's description. The packaging style should be symmetrical and realistic, with smooth plastic casing and a matte cardboard background.
+
+    Lighting should be soft and neutral. Avoid angled perspectives — the view should look like a real-life boxed action figure photographed directly from the front.
     """
     
     private func combinedPrompt(with userInput: String) -> String {
@@ -29,7 +31,7 @@ struct ActionFigurePopup: View {
     private func onConfirm() async {
         do {
             withAnimation {
-                globalState.showPresetPreview = false
+                globalState.showActionFigurePopup = false
                 globalState.isLoading = true
             }
             
@@ -89,13 +91,14 @@ struct ActionFigurePopup: View {
                         .padding(.top)
                     
                     TextField("Describe your action figure (e.g., cyber ninja with glowing sword)...", text: $promptText)
-                        .padding(12)
-                        .background(Color(.systemGray6))
-                        .cornerRadius(10)
+                        .padding(14)
+                        .background(Color.white)
+                        .cornerRadius(12)
                         .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(Color.gray.opacity(0.5), lineWidth: 1)
                         )
+                        .shadow(color: .black.opacity(0.05), radius: 5, x: 0, y: 2)
                         .font(.custom(Fonts.shared.interRegular, size: 16))
                         .padding(.horizontal, isIpad ? 90 : 24)
                     

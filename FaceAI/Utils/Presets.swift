@@ -44,13 +44,15 @@ let imagePresets: [ImagePreset] = [
 let ghibliImages: [URL] = [URL(string: "https://ofiles.kitety.com/ghibli/landingpage/e56036c6-2160-4ef3-bb7d-d189e2eb8c41.webp")!,
     URL(string: "https://www.myimg.ai/static/ghibli-style-ai-generator/ghibli-style-ai-generator-features-hd.webp")!,
     URL(string: "https://images1.dnaindia.com/images/DNA-EN/900x1600/2025/3/29/1743263569718_3.png")!,
-    URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXoyTVkU4l9B5UPJsOYqWRpkAYD89qHOz8fHSEPTIhpkRelxa7mIBfxdS4Ps49d-Voo9Y&usqp=CAU")!
+    URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXoyTVkU4l9B5UPJsOYqWRpkAYD89qHOz8fHSEPTIhpkRelxa7mIBfxdS4Ps49d-Voo9Y&usqp=CAU")!,
+    URL(string: "https://r2.starryai.com/results/1042960448/3d1f5187-50e5-4d97-a208-e8106e06ecb4.webp")!,
+    URL(string: "https://instagram.fkiv7-1.fna.fbcdn.net/v/t51.2885-15/487353781_18356434600181983_5482153751728611888_n.jpg?stp=dst-jpg_e35_tt6&cb=30a688f7-fa102a98&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0uaW1hZ2VfdXJsZ2VuLjE0NDB4MjU2MC5zZHIuZjc1NzYxLmRlZmF1bHRfaW1hZ2UifQ&_nc_ht=instagram.fkiv7-1.fna.fbcdn.net&_nc_cat=107&_nc_oc=Q6cZ2QHZqJH-RnkCr7qxAGzZQyW9T0gqi-9CJA0AsGATjFUBkkUMqOvMlMT9gG6nZAZAUcg&_nc_ohc=DDwAijV6FdEQ7kNvwGYSQWd&_nc_gid=t_cvnlPWVotIuuEtrK7-Rw&edm=ALQROFkBAAAA&ccb=7-5&ig_cache_key=MzU5OTA5MTM3NTY5MTE3NTg0OQ%3D%3D.3-ccb7-5-cb30a688f7-fa102a98&oh=00_AfFmulteu-UTaiRmw671aPJoPvDnz0vnynLb_gjOTg1TtQ&oe=680BABDD&_nc_sid=fc8dfb")!
 ]
 
 let actionFigures: [URL] = [
     URL(string: "https://miro.medium.com/v2/resize:fit:666/1*eXoOtzu0mZoBa6jO5-jrvw.png")!,
     URL(string: "https://media.licdn.com/dms/image/v2/D4E22AQGG2KgpuvHbQQ/feedshare-shrink_800/B4EZYHswJVGgAo-/0/1743885897431?e=2147483647&v=beta&t=QLFK5mHp33bks4Xc5JzEdRCJpZ8Dq-l-Y4Ssh8mVeYk")!,
-    URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmcAyNa0NzcUduYzH9XqkyRELfk6jzFin_4-dz53-yz7Xv2jbA2uVbLJzhMtrnASK6gd4&usqp=CAU")!,
     URL(string: "https://s.yimg.com/ny/api/res/1.2/5qPqtcgNazZv11LtoNCH2Q--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTE0NDA-/https://media.zenfs.com/en/whtm_articles_902/27b3b98b21064e3aa4898f41feb38a9f")!,
-    URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxpZRGBlgjUN_Q1oTvrw83Nq0bPlLQ_YZ8S7j_VXOU2jCCTfJWEpYSLg7yPnDMfA8Lpn0&usqp=CAU")!
+    URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxpZRGBlgjUN_Q1oTvrw83Nq0bPlLQ_YZ8S7j_VXOU2jCCTfJWEpYSLg7yPnDMfA8Lpn0&usqp=CAU")!,
+    URL(string: "https://plugins-media.makeupar.com/smb/story/2025-04-08/ae9e473f-96db-474c-8a9b-975a86f6c346.png")!
 ]
