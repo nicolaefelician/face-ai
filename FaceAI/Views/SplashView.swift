@@ -28,7 +28,7 @@ struct SplashView: View {
                     .looping()
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 250, height: 250)
+                    .frame(width: isIpad ? 250 : 200, height: isIpad ? 250 : 200)
                 
                 Spacer()
             }
@@ -40,7 +40,9 @@ struct SplashView: View {
                     try await UserApi.shared.fetchEnhanceJobs()
                     try await UserApi.shared.fetchUserCredits()
                     
-                    requestForAuthorizationIfNecessary()
+                    if !globalState.showOnboarding {
+                        requestForAuthorizationIfNecessary()
+                    }
                     
                     JobFetcher.shared.startWatcher()
                 } catch {

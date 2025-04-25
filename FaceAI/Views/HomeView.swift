@@ -295,8 +295,8 @@ struct HomeView: View {
                                         RetryingAsyncImage(
                                             url: URL(string: preset.image)!,
                                             size: isIpad
-                                                ? CGSize(width: preset.imageSize.width * 2, height: preset.imageSize.height * 2)
-                                                : preset.imageSize,
+                                            ? CGSize(width: preset.imageSize.width * 2, height: preset.imageSize.height * 2)
+                                            : preset.imageSize,
                                             maxRetries: 3,
                                             retryDelay: 1.5
                                         )
@@ -310,10 +310,27 @@ struct HomeView: View {
                     }
                 }
                 .padding(.bottom)
+                .onTapGesture {
+                    print("ON tap gesture")
+                    if globalState.showMenu {
+                        withAnimation {
+                            globalState.showMenu = false
+                        }
+                    }
+                }
             }
             .disabled(globalState.showMenu)
             
             if globalState.showMenu {
+                Rectangle()
+                    .foregroundStyle(.white.opacity(0.5))
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .onTapGesture {
+                        withAnimation {
+                            globalState.showMenu = false
+                        }
+                    }
+                
                 SideMenuView()
             }
         }

@@ -31,21 +31,19 @@ struct ImageFilterView: View {
                             }) {
                                 Image(uiImage: image)
                                     .resizable()
-                                    .aspectRatio(contentMode: .fit)
+                                    .aspectRatio(contentMode: .fill)
                                     .frame(
-                                        width: min(geometry.size.width * 0.6, 500),
-                                        height: min(geometry.size.height * 0.6, 500)
+                                        width: geometry.size.width * 0.8,
+                                        height: geometry.size.height * 0.8
                                     )
-                                    .background(Color.white)
-                                    .cornerRadius(18)
-                                    .shadow(color: Color.black.opacity(0.1), radius: 12, x: 0, y: 6)
+                                    .clipped()
+                                    .cornerRadius(22)
                                     .padding(.horizontal, 20)
-                                    .padding(.bottom, 10)
                             }
                         }
                     }
                     .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                    .frame(height: min(geometry.size.height * 0.7, 550))
+                    .frame(height: min(geometry.size.height * 0.8, 550))
                     .padding(.vertical, 20)
                 }
                 
@@ -65,7 +63,7 @@ struct ImageFilterView: View {
                         }
                     }
                     .padding(.horizontal, 70)
-                    .padding(.vertical, 20)
+                    .padding(.bottom, 40)
                 }
             }
             
@@ -160,7 +158,7 @@ struct ImageFilterView: View {
                     
                     Spacer()
                 }
-                .padding(.bottom, 30)
+                .padding(.bottom, 25)
             }
         }
         .navigationBarBackButtonHidden(true)

@@ -52,7 +52,7 @@ let ghibliImages: [URL] = [URL(string: "https://ofiles.kitety.com/ghibli/landing
 let actionFigures: [URL] = [
     URL(string: "https://miro.medium.com/v2/resize:fit:666/1*eXoOtzu0mZoBa6jO5-jrvw.png")!,
     URL(string: "https://media.licdn.com/dms/image/v2/D4E22AQGG2KgpuvHbQQ/feedshare-shrink_800/B4EZYHswJVGgAo-/0/1743885897431?e=2147483647&v=beta&t=QLFK5mHp33bks4Xc5JzEdRCJpZ8Dq-l-Y4Ssh8mVeYk")!,
-    URL(string: "https://s.yimg.com/ny/api/res/1.2/5qPqtcgNazZv11LtoNCH2Q--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTE0NDA-/https://media.zenfs.com/en/whtm_articles_902/27b3b98b21064e3aa4898f41feb38a9f")!,
     URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxpZRGBlgjUN_Q1oTvrw83Nq0bPlLQ_YZ8S7j_VXOU2jCCTfJWEpYSLg7yPnDMfA8Lpn0&usqp=CAU")!,
-    URL(string: "https://plugins-media.makeupar.com/smb/story/2025-04-08/ae9e473f-96db-474c-8a9b-975a86f6c346.png")!
+    URL(string: "https://plugins-media.makeupar.com/smb/story/2025-04-08/ae9e473f-96db-474c-8a9b-975a86f6c346.png")!,
+    URL(string: "https://b2c-contenthub.com/wp-content/uploads/2025/04/AI-action-figure-from-a-photo.png?w=800")!
 ]

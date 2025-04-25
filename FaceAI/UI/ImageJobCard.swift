@@ -107,6 +107,6 @@ struct ImageJobCard: View {
             }
             .buttonStyle(PlainButtonStyle())
         }
-        .frame(height: isIpad ? 200 * 2 : 200)
+        .frame(height: isIpad ? 200 * 2 : 225)
     }
 }
