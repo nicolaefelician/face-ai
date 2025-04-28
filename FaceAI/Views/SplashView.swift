@@ -1,5 +1,6 @@
 import SwiftUI
 import Lottie
+import SuperwallKit
 
 struct SplashView: View {
     @ObservedObject private var globalState = GlobalState.shared
@@ -36,15 +37,21 @@ struct SplashView: View {
             .background(Color.white)
             .task {
                 do {
-                    try await UserApi.shared.fetchUserJobs()
-                    try await UserApi.shared.fetchEnhanceJobs()
-                    try await UserApi.shared.fetchUserCredits()
+                    try? await UserApi.shared.fetchUserJobs()
+                    try? await UserApi.shared.fetchEnhanceJobs()
+                    try? await UserApi.shared.fetchUserCredits()
+                    
+                    JobFetcher.shared.startWatcher()
                     
                     if !globalState.showOnboarding {
                         requestForAuthorizationIfNecessary()
+                        
+                        if globalState.isProUser {
+                            try await Task.sleep(nanoseconds: 1_000_000_000)
+                            Superwall.shared.register(placement: "test")
+                        }
                     }
                     
-                    JobFetcher.shared.startWatcher()
                 } catch {
                     print("❌ Failed to fetch jobs: \(error)")
                 }

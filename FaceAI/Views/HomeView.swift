@@ -280,6 +280,21 @@ struct HomeView: View {
                                 .font(.custom(Fonts.shared.instrumentSansSemibold, size: 22))
                                 .foregroundStyle(.black)
                             Spacer()
+                            
+                            Button(action: {
+                                globalState.navigationPath.append(.prompts(category: category))
+                            }) {
+                                HStack {
+                                    Text("View all")
+                                        .font(.custom(Fonts.shared.instrumentSansSemibold, size: 15))
+                                    
+                                    Image(systemName: "chevron.right")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 15, height: 15)
+                                }
+                                .foregroundColor(.accentColor)
+                            }
                         }
                         .padding(25)
                         

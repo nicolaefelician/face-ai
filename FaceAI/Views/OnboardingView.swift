@@ -129,7 +129,7 @@ struct OnboardingView: View {
         let screenHeight = UIScreen.main.bounds.height
         
         return VStack {
-            GifView("privacy")
+            GifView(fileName: "privacy")
                 .frame(width: isIpad ? 645 : 430, height: isIpad ? 465 : 310)
                 .padding(.top, screenHeight * 0.13)
             
@@ -187,6 +187,9 @@ struct OnboardingView: View {
             .padding(.horizontal, isIpad ? 70 : 38)
             .padding(.bottom, isIpad ? 40 : 20)
         }
+        .onAppear(perform: {
+            UIScrollView.appearance().isScrollEnabled = false
+        })
     }
     
     private func loadingPage() -> some View {
@@ -207,9 +210,9 @@ struct OnboardingView: View {
                     
                     requestReview()
                     
-                    Consts.shared.completeOnboarding()
-                    
                     try? await Task.sleep(nanoseconds: 4 * 1_000_000_000)
+                    
+                    Consts.shared.completeOnboarding()
                     
                     Superwall.shared.register(placement: "campaign_trigger")
                 }
@@ -231,12 +234,39 @@ struct OnboardingView: View {
         return ZStack {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
-                    if viewModel.selectedImages.isEmpty {
-                        Text("Examples")
-                            .font(.custom(Fonts.shared.interSemibold, size: 20))
-                            .foregroundColor(.black.opacity(0.8))
-                            .padding(.bottom)
+                    HStack {
+                        Text("Face Processing")
+                            .font(.custom(Fonts.shared.interSemibold, size: 26))
+                            .foregroundColor(.black)
                         
+                        Spacer()
+                    }
+                    .padding(.bottom)
+                    .padding(.horizontal, isIpad ? 70 : 42)
+                    
+                    HStack {
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .foregroundColor(.orange)
+                        
+                        VStack {
+                            Text("Please upload exactly **8 clear photos** of yourself for the best AI results.")
+                                .font(.custom(Fonts.shared.interSemibold, size: 15))
+                                .foregroundColor(.black)
+                                .multilineTextAlignment(.leading)
+                        }
+                    }
+                    .padding(.vertical, 12)
+                    .padding(.horizontal, 15)
+                    .background(Color(hex: "#FFF6F0"))
+                    .cornerRadius(10)
+                    .padding(.horizontal, isIpad ? 70 : 38)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.orange, lineWidth: 1)
+                            .padding(.horizontal, isIpad ? 70 : 42)
+                    )
+                    
+                    if viewModel.selectedImages.isEmpty {
                         HStack(spacing: 18) {
                             VStack(spacing: 8) {
                                 Image("good")
@@ -279,31 +309,7 @@ struct OnboardingView: View {
                             }
                         }
                         .padding(.horizontal, isIpad ? 70 : 38)
-                        .padding(.bottom, 15)
-                    }
-                    
-                    if viewModel.selectedImages.count != 8 {
-                        HStack {
-                            Image(systemName: "exclamationmark.triangle.fill")
-                                .foregroundColor(.orange)
-                            
-                            VStack {
-                                Text("Please upload exactly **8 clear photos** of yourself for the best AI results.")
-                                    .font(.custom(Fonts.shared.interSemibold, size: 15))
-                                    .foregroundColor(.black)
-                                    .multilineTextAlignment(.leading)
-                            }
-                        }
-                        .padding(.vertical, 12)
-                        .padding(.horizontal, 15)
-                        .background(Color(hex: "#FFF6F0"))
-                        .cornerRadius(10)
-                        .padding(.horizontal, isIpad ? 70 : 42)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color.orange, lineWidth: 1)
-                                .padding(.horizontal, isIpad ? 70 : 42)
-                        )
+                        .padding(.top, 20)
                     }
                     
                     if viewModel.isLoading {
@@ -313,14 +319,9 @@ struct OnboardingView: View {
                                 .foregroundStyle(.black.opacity(0.7))
                             ProgressView()
                         }
-                        .padding(.top, screenHeight * 0.15)
+                        .padding(.vertical, screenHeight * 0.15)
                         .frame(maxWidth: .infinity)
                     } else if viewModel.selectedImages.count > 0 {
-                        Text("\(viewModel.selectedImages.count) / 8")
-                            .font(.custom(Fonts.shared.interSemibold, size: 20))
-                            .foregroundColor(.black.opacity(0.8))
-                            .padding(.top, screenHeight * 0.01)
-                        
                         TabView(selection: $viewModel.currentUploadedPhotoIndex) {
                             ForEach(0..<viewModel.selectedImages.count, id: \.self) { index in
                                 Image(uiImage: viewModel.selectedImages[index])
@@ -336,18 +337,23 @@ struct OnboardingView: View {
                         .frame(height: screenHeight * 0.35)
                         .padding(.top, screenHeight * 0.01)
                         
+                        Text("\(viewModel.selectedImages.count) / 8")
+                            .font(.custom(Fonts.shared.interSemibold, size: 16))
+                            .foregroundColor(.black.opacity(0.6))
+                            .padding(.top, screenHeight * 0.01)
+                        
                         HStack {
                             ForEach(0..<viewModel.selectedImages.count, id: \.self) { index in
                                 Rectangle()
-                                    .frame(height: 4)
+                                    .frame(height: 2)
                                     .frame(maxWidth: .infinity)
-                                    .foregroundStyle(viewModel.currentUploadedPhotoIndex == index ? Colors.shared.primaryColor : Color.gray.opacity(0.5))
-                                    .cornerRadius(12)
+                                    .foregroundStyle(viewModel.currentUploadedPhotoIndex == index ? Colors.shared.primaryColor : Color.gray.opacity(0.3))
+                                    .cornerRadius(13)
                             }
                         }
                         .padding(.horizontal, 70)
                         .padding(.top, screenHeight * 0.05)
-                        .padding(.bottom, 20)
+                        .padding(.bottom, 13)
                     }
                     
                     PhotosPicker(
@@ -356,23 +362,20 @@ struct OnboardingView: View {
                         matching: .images,
                         photoLibrary: .shared()
                     ) {
-                        VStack {
-                            Image("img")
+                        HStack {
+                            Image(systemName: "photo.on.rectangle")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 33, height: 33)
-                                .padding(.bottom, 5)
-                            
-                            Text("Upload Images")
-                                .font(.custom(Fonts.shared.interRegular, size: 15))
-                                .foregroundStyle(.gray)
+                                .frame(width: 22, height: 22)
+                            Text("Upload Photos")
                         }
+                        .padding(.vertical, 12)
+                        .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
-                        .padding(.vertical, 20)
-                        .background(Color(hex: "#ebebeb"))
-                        .cornerRadius(12)
+                        .background(.accent)
+                        .cornerRadius(14)
                         .padding(.horizontal, isIpad ? 70 : 45)
-                        .padding(.top, 10)
+                        .padding(.top, 32)
                     }
                     .onChange(of: viewModel.selectedItems) { newItems in
                         Task {
@@ -413,7 +416,7 @@ struct OnboardingView: View {
                     }
                 }) {
                     ZStack(alignment: .center) {
-                        Text("Get Started")
+                        Text("Continue")
                             .font(.custom(Fonts.shared.interSemibold, size: isIpad ? 24 : 20))
                             .foregroundStyle(Color.white)
                             .padding(.vertical, isIpad ? 22 : 16)
@@ -438,12 +441,12 @@ struct OnboardingView: View {
             }
         }
         .onAppear {
+            UIScrollView.appearance().isScrollEnabled = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 viewModel.requestForAuthorizationIfNecessary()
             }
         }
     }
-    
     
     var body: some View {
         if viewModel.showGenderPicker {
@@ -461,7 +464,7 @@ struct OnboardingView: View {
             TabView(selection: $viewModel.currentPageIndex) {
                 VStack {
                     ZStack {
-                        GifView("onboarding1")
+                        GifView(fileName: "onboarding1")
                             .scaledToFill()
                             .frame(width: screenWidth, height: screenHeight * 0.65)
                             .clipped()
@@ -560,7 +563,10 @@ struct OnboardingView: View {
                 
                 VStack {
                     ZStack {
-                        GifView("onboarding2")
+                        GifView(fileName: "onboarding4")
+                            .scaledToFill()
+                            .frame(height: screenHeight * 0.5)
+                            .frame(width: screenWidth)
                             .clipped()
                         
                         VStack {
@@ -575,7 +581,6 @@ struct OnboardingView: View {
                                 endPoint: .bottom
                             )
                             .frame(height: screenHeight * 0.13)
-                            .padding(.top, -10)
                             
                             Spacer()
                         }
@@ -601,7 +606,110 @@ struct OnboardingView: View {
                                 endPoint: .top
                             )
                             .frame(height: screenHeight * 0.13)
-                            .padding(.bottom, screenHeight * 0.04)
+                            .padding(.bottom, screenHeight * 0.01)
+                        }
+                    }
+                    
+                    Spacer()
+                    
+                    VStack(alignment: .leading) {
+                        Text("Access AI")
+                            .font(.custom(Fonts.shared.instrumentSansSemibold, size: isIpad ? 45 : 26))
+                            .foregroundStyle(.black)
+                            .multilineTextAlignment(.leading)
+                        
+                        Text("Ghibli-Style Art")
+                            .font(.custom(Fonts.shared.instrumentSansSemibold, size: isIpad ? 45 : 26))
+                            .foregroundStyle(Colors.shared.primaryColor)
+                            .multilineTextAlignment(.leading)
+                        
+                        Text("Turn your photos into hand-drawn masterpieces with a tap, inspired by Ghibli’s iconic style.")
+                            .font(.custom(Fonts.shared.interRegular, size: isIpad ? 21 : 17))
+                            .foregroundStyle(.black.opacity(0.7))
+                            .padding(.top, 4)
+                            .multilineTextAlignment(.leading)
+                    }
+                    .padding(.horizontal, isIpad ? 70 : 35)
+                    .padding(.bottom, screenHeight * 0.03)
+                    
+                    Button(action: {
+                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                        withAnimation {
+                            viewModel.currentPageIndex += 1
+                        }
+                    }) {
+                        ZStack(alignment: .center) {
+                            Text("Continue")
+                                .font(.custom(Fonts.shared.interSemibold, size: isIpad ? 24 : 20))
+                                .foregroundStyle(Color.white)
+                                .padding(.vertical, isIpad ? 22 : 16)
+                                .frame(maxWidth: .infinity)
+                                .background(Colors.shared.primaryColor)
+                                .cornerRadius(24)
+                                .shadow(color: Color.black.opacity(0.15), radius: 6, x: 0, y: 4)
+                            
+                            HStack {
+                                Spacer()
+                                
+                                Image("arrow")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 21, height: 21)
+                                    .padding(.trailing, 15)
+                            }
+                        }
+                        .padding(.horizontal, isIpad ? 70 : 37)
+                        .padding(.bottom, 20)
+                    }
+                }
+                .padding(.top, screenHeight * 0.015)
+                .tag(1)
+                
+                VStack {
+                    ZStack {
+                        GifView(fileName: "onboarding2")
+                            .scaledToFill()
+                            .frame(height: screenHeight * 0.525)
+                            .frame(width: screenWidth)
+                            .clipped()
+                        
+                        VStack {
+                            LinearGradient(
+                                gradient: Gradient(colors: [
+                                    Color.white,
+                                    Color.white,
+                                    Color.white.opacity(0.4),
+                                    Color.white.opacity(0)
+                                ]),
+                                startPoint: .top,
+                                endPoint: .bottom
+                            )
+                            .frame(height: screenHeight * 0.13)
+                            
+                            Spacer()
+                        }
+                        
+                        VStack {
+                            Spacer()
+                            
+                            LinearGradient(
+                                gradient: Gradient(colors: [
+                                    Color.white,
+                                    Color.white.opacity(0.99),
+                                    Color.white.opacity(0.85),
+                                    Color.white.opacity(0.7),
+                                    Color.white.opacity(0.5),
+                                    Color.white.opacity(0.3),
+                                    Color.white.opacity(0.2),
+                                    Color.white.opacity(0.15),
+                                    Color.white.opacity(0.1),
+                                    Color.white.opacity(0.05),
+                                    Color.white.opacity(0)
+                                ]),
+                                startPoint: .bottom,
+                                endPoint: .top
+                            )
+                            .frame(height: screenHeight * 0.13)
                         }
                     }
                     
@@ -658,11 +766,11 @@ struct OnboardingView: View {
                     }
                 }
                 .padding(.top, screenHeight * 0.03)
-                .tag(1)
+                .tag(2)
                 
                 VStack {
                     ZStack {
-                        GifView("onboarding3")
+                        GifView(fileName: "onboarding3")
                             .scaledToFill()
                             .frame(height: screenHeight * 0.525)
                             .frame(width: screenWidth)
@@ -762,10 +870,13 @@ struct OnboardingView: View {
                         .padding(.bottom, 20)
                     }
                 }
-                .tag(2)
+                .tag(3)
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             .ignoresSafeArea(edges: .top)
+            .onAppear(perform: {
+                UIScrollView.appearance().isScrollEnabled = false
+            })
         }
     }
 }

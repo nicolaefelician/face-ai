@@ -124,7 +124,6 @@ struct ImageFilterPopup: View {
                     HStack(spacing: 20) {
                         Button("Cancel") {
                             withAnimation {
-                                globalState.selectedFilterType = .enhance
                                 globalState.showImageFilter = false
                             }
                         }
