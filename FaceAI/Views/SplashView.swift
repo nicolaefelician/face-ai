@@ -37,21 +37,16 @@ struct SplashView: View {
             .background(Color.white)
             .task {
                 do {
-                    try? await UserApi.shared.fetchUserJobs()
-                    try? await UserApi.shared.fetchEnhanceJobs()
-                    try? await UserApi.shared.fetchUserCredits()
-                    
                     JobFetcher.shared.startWatcher()
                     
                     if !globalState.showOnboarding {
                         requestForAuthorizationIfNecessary()
                         
-                        if globalState.isProUser {
+                        if !globalState.isProUser {
                             try await Task.sleep(nanoseconds: 1_000_000_000)
-                            Superwall.shared.register(placement: "test")
+                            Superwall.shared.register(placement: "campaign_trigger")
                         }
                     }
-                    
                 } catch {
                     print("❌ Failed to fetch jobs: \(error)")
                 }
@@ -66,7 +61,7 @@ struct SplashView: View {
             VStack(spacing: 10) {
                 Spacer()
                 
-                Text("Face AI")
+                Text("Studio AI")
                     .font(.custom(Fonts.shared.instrumentSansSemibold, size: 28))
                     .foregroundStyle(.red.opacity(0.9))
                 

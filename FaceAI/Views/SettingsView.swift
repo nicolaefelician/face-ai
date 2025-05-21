@@ -48,7 +48,6 @@ struct SettingsView: View {
             }
             .padding()
             .padding(.top, 15)
-            .padding(.horizontal, screenWidth * 0.02)
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {
@@ -106,7 +105,7 @@ struct SettingsView: View {
     }
     
     private func shareApp() {
-        let url = ""
+        let url = "https://apps.apple.com/us/app/studio-ai-action-figure-trend/id6744292117"
         globalState.imagesToShow.append(url)
         globalState.isSharingImages = true
     }
@@ -118,22 +117,47 @@ struct SettingsButtonView: View {
     let iconColor: Color
     
     var body: some View {
-        HStack {
-            Image(systemName: icon)
-                .frame(width: 30, height: 30)
-                .foregroundColor(iconColor)
+        HStack(spacing: 16) {
+            ZStack {
+                Circle()
+                    .fill(iconColor.opacity(0.15))
+                    .frame(width: 40, height: 40)
+                
+                Image(systemName: icon)
+                    .font(.system(size: 18, weight: .medium))
+                    .foregroundColor(iconColor)
+            }
             
             Text(title)
-                .foregroundColor(.black)
                 .font(.custom(Fonts.shared.instrumentSansSemibold, size: 17))
+                .foregroundColor(.black)
             
             Spacer()
             
             Image(systemName: "chevron.right")
-                .foregroundColor(.gray)
+                .font(.system(size: 14, weight: .medium))
+                .foregroundColor(.gray.opacity(0.5))
         }
-        .padding()
-        .background(Color.gray.opacity(0.1))
-        .cornerRadius(12)
+        .padding(.horizontal, 13)
+        .padding(.vertical, 12)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(
+                    LinearGradient(
+                        gradient: Gradient(colors: [
+                            Color.white,
+                            Color.white.opacity(0.95)
+                        ]),
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                )
+                .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 2)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(Color.gray.opacity(0.1), lineWidth: 1)
+        )
+        .contentShape(Rectangle())
     }
 }

@@ -43,7 +43,7 @@ struct ContentView: View {
                         
                         ToolbarItem(placement: .topBarLeading) {
                             VStack(spacing: 2) {
-                                Text("Face AI")
+                                Text("Studio AI")
                                     .font(.custom(Fonts.shared.instrumentSansSemibold, size: 22))
                                     .foregroundStyle(.black)
                             }

@@ -60,6 +60,7 @@ let imagePresets: [ImagePreset] = [
     ImagePreset(image: "https://sdbooth2-production.s3.amazonaws.com/r6l5ct8lktv0vf2x2k0hiavq8aye", systemPrompt: "A dark sks \(Consts.shared.selectedGender ?? "") appears as a rapper in a gritty horror manga-inspired multi-panel scene. Styled in intense shades of red without black and white, the artwork captures a violent gang war unfolding with dramatic energy and expressive line work. Urban backdrops are fragmented across panels, blending chaos and action in a comic book format. The overall aesthetic is aggressive, surreal, and cinematic, evoking fear, adrenaline, and raw power through stylized manga visuals.", category: .rapper),
     ImagePreset(image: "https://sdbooth2-production.s3.amazonaws.com/wgipbtbqtvyu6h2deylm155f75dk", systemPrompt: "A dark sks \(Consts.shared.selectedGender ?? "") appears as a rapper in a gritty horror manga-inspired multi-panel scene. Styled in intense shades of red without black and white, the artwork captures a violent gang war unfolding with dramatic energy and expressive line work. Urban backdrops are fragmented across panels, blending chaos and action in a comic book format. The overall aesthetic is aggressive, surreal, and cinematic, evoking fear, adrenaline, and raw power through stylized manga visuals.", category: .rapper),
     ImagePreset(image: "https://sdbooth2-production.s3.amazonaws.com/qazq3lj4odpv4m35fxwy3jraxlf1", systemPrompt: "A dark sks \(Consts.shared.selectedGender ?? "") appears as a rapper in a gritty horror manga-inspired multi-panel scene. Styled in intense shades of red without black and white, the artwork captures a violent gang war unfolding with dramatic energy and expressive line work. Urban backdrops are fragmented across panels, blending chaos and action in a comic book format. The overall aesthetic is aggressive, surreal, and cinematic, evoking fear, adrenaline, and raw power through stylized manga visuals.", category: .rapper),
+    
     ImagePreset(image: "https://sdbooth2-production.s3.amazonaws.com/ynmp8t51g08osy075mm75jz2plw2", systemPrompt: "A sks \(Consts.shared.selectedGender ?? "") rides the crest of vibrant waves on a sleek surfboard, surrounded by the golden light of late afternoon. The scene radiates tropical energy, with sun-kissed skin reflecting the glow of golden hour and waves crashing gently along the shore. In the background, colorful palm trees sway in the warm seaside breeze, adding motion and atmosphere to the coastal setting. The overall composition blends confidence, joy, and the freedom of surf culture in a vivid, tropical environment.", imageSize: CGSize(width: 270, height: 150), category: .surfing),
     ImagePreset(image: "https://sdbooth2-production.s3.amazonaws.com/kfaudjghxlmo6qil28b8o5ny77yb", systemPrompt: "A Filipino sks \(Consts.shared.selectedGender ?? "") stands confidently on a sunlit California beach, dressed in vibrant surf gear that reflects the energy of the coast. A surfboard with colorful designs rests beside one leg, while the gaze is fixed thoughtfully on the rolling waves ahead. The backdrop features a clear blue sky and distant palm trees swaying gently in the breeze, capturing the essence of an ideal surf day. The relaxed stance and vivid setting convey a deep connection to the ocean, evoking adventure, warmth, and coastal freedom.", imageSize: CGSize(width: 270, height: 150), category: .surfing),
     ImagePreset(image: "https://sdbooth2-production.s3.amazonaws.com/zhwj8dp4cpsdgtynx7wja84xsy6j", systemPrompt: "A sks \(Consts.shared.selectedGender ?? "") rides the crest of vibrant waves on a sleek surfboard, surrounded by the golden light of late afternoon. The scene radiates tropical energy, with sun-kissed skin reflecting the glow of golden hour and waves crashing gently along the shore. In the background, colorful palm trees sway in the warm seaside breeze, adding motion and atmosphere to the coastal setting. The overall composition blends confidence, joy, and the freedom of surf culture in a vivid, tropical environment.", imageSize: CGSize(width: 270, height: 150), category: .surfing),
@@ -75,7 +76,6 @@ let imagePresets: [ImagePreset] = [
         The backdrop features the glowing city skyline, neon lights flickering below, and a few graffiti-tagged walls, capturing the raw energy of the streets. 
         The relaxed pose and vivid setting convey creativity, ambition, and a deep connection to music and culture.
         """,
-        imageSize: CGSize(width: 270, height: 150),
         category: .rapper
     ),
     ImagePreset(
@@ -86,7 +86,6 @@ let imagePresets: [ImagePreset] = [
         The backdrop features rough brick walls covered in graffiti and a soft haze from neon lights, creating a raw, authentic street vibe. 
         The powerful stance, bold accessories, and direct eye contact capture ambition, attitude, and the pulse of hip-hop culture.
         """,
-        imageSize: CGSize(width: 270, height: 150),
         category: .rapper
     ),
     ImagePreset(
@@ -96,7 +95,6 @@ let imagePresets: [ImagePreset] = [
         The rapper gazes confidently at the camera, wearing stylish streetwear and a gold chain, fully embodying success and street royalty. 
         Behind, the blurred neon signs and vibrant nightlife amplify the vibe of wealth, fame, and unstoppable ambition.
         """,
-        imageSize: CGSize(width: 270, height: 150),
         category: .rapper
     ),
     ImagePreset(
@@ -106,7 +104,6 @@ let imagePresets: [ImagePreset] = [
         The rapper wears trendy streetwear, bold jewelry, and a cap tilted slightly, striking a charismatic pose with a direct gaze at the viewer. 
         The scene feels like a high-end advertisement shoot, highlighting fame, success, and bold personal style in a clean, minimalistic setting.
         """,
-        imageSize: CGSize(width: 270, height: 150),
         category: .rapper
     ),
     ImagePreset(
@@ -117,7 +114,6 @@ let imagePresets: [ImagePreset] = [
         Dressed in stylish streetwear, the rapper stares directly at the camera with a fierce attitude. 
         The background is minimal to focus all attention on the energy, style, and intense expression of the rapper.
         """,
-        imageSize: CGSize(width: 270, height: 150),
         category: .rapper
     ),
     ImagePreset(
@@ -128,7 +124,6 @@ let imagePresets: [ImagePreset] = [
         The rapper strikes a confident, fearless pose, looking straight into the camera with intense energy. 
         The background is clean and minimalistic, making the tattoos, jewelry, and red cap the dominant focus, capturing the raw power and street authenticity.
         """,
-        imageSize: CGSize(width: 270, height: 150),
         category: .rapper
     ),
     ImagePreset(
@@ -139,7 +134,6 @@ let imagePresets: [ImagePreset] = [
         Stage lights beam dramatically from behind, casting sharp highlights and shadows, while a cheering crowd is faintly visible in the background. 
         The rapper’s intense performance energy and confident pose create a powerful, electrifying scene.
         """,
-        imageSize: CGSize(width: 270, height: 150),
         category: .rapper
     ),
     ImagePreset(
@@ -149,7 +143,6 @@ let imagePresets: [ImagePreset] = [
         The rapper wears stylish streetwear, including a bold jacket, sunglasses, and baggy jeans, under dramatic stage lights that create a powerful, energetic vibe. 
         The background shows a cheering audience with colorful spotlights cutting through the scene, capturing the excitement of a live performance.
         """,
-        imageSize: CGSize(width: 270, height: 150),
         category: .rapper
     ),
     
@@ -167,7 +160,6 @@ let imagePresets: [ImagePreset] = [
         Sweat glistens slightly on the skin, highlighting the effort and strength. 
         Dumbbells and workout machines fill the background, creating a gritty, motivational atmosphere that radiates discipline, energy, and physical achievement.
         """,
-        imageSize: CGSize(width: 270, height: 150),
         category: .gym
     ),
     ImagePreset(
@@ -178,7 +170,6 @@ let imagePresets: [ImagePreset] = [
         Sweat glistens slightly on the skin, highlighting the effort and strength. 
         Dumbbells and workout machines fill the background, creating a gritty, motivational atmosphere that radiates discipline, energy, and physical achievement.
         """,
-        imageSize: CGSize(width: 270, height: 150),
         category: .gym
     ),
     ImagePreset(
@@ -188,7 +179,6 @@ let imagePresets: [ImagePreset] = [
         The person showcases well-defined muscles with a strong posture, wearing a fitted athletic tank top and gym shorts. 
         Bright gym lights highlight the muscular physique, while workout equipment and free weights fill the background, creating an intense, inspiring atmosphere of strength, focus, and discipline.
         """,
-        imageSize: CGSize(width: 270, height: 150),
         category: .gym
     ),
     ImagePreset(
@@ -198,7 +188,6 @@ let imagePresets: [ImagePreset] = [
         Both are flexing their muscles with big smiles, wearing fitted athletic wear that highlights their strong, toned physiques. 
         The background shows gym equipment, weights, and bright lights, creating a motivational family fitness vibe full of strength, energy, and pride.
         """,
-        imageSize: CGSize(width: 270, height: 150),
         category: .gym
     ),
     ImagePreset(
@@ -208,7 +197,6 @@ let imagePresets: [ImagePreset] = [
         Both are flexing their muscles with big smiles, wearing fitted athletic wear that highlights their strong, toned physiques. 
         The background shows gym equipment, weights, and bright lights, creating a motivational family fitness vibe full of strength, energy, and pride.
         """,
-        imageSize: CGSize(width: 270, height: 150),
         category: .gym
     ),
     ImagePreset(
@@ -219,7 +207,6 @@ let imagePresets: [ImagePreset] = [
         Both individuals are smiling confidently, showing off their strength and fitness progress. 
         The selfie is captured with direct camera focus (no mirror), highlighting the positive energy, motivation, and teamwork in a clean and inspiring gym atmosphere.
         """,
-        imageSize: CGSize(width: 270, height: 150),
         category: .gym
     )
 ]

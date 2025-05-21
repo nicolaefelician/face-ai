@@ -15,6 +15,9 @@ final class Consts {
     var uploadedImages: [UIImage] = []
     
     var hasTunedModel: Bool = false
+    var hasUsedBackgroundRemoval: Bool = false
+    var hasUsedPhotoEnhancement: Bool = false
+    var hasUsedGhibliStyle: Bool = false
     
     let superwallApiKey = "pk_afd37508a38ea9ef7b9ac446f0d940e23138b3c0f8d8ba61"
     let revenueCatApiKey: String = "appl_XkYNHSHHWXphXOJgkAJvJiyuAyg"
@@ -32,6 +35,9 @@ final class Consts {
         selectedGender = UserDefaults.standard.string(forKey: "gender")
         fcmTokenId = UserDefaults.standard.string(forKey: "fcmToken")
         hasTunedModel = UserDefaults.standard.bool(forKey: "hasTunedModel")
+        hasUsedBackgroundRemoval = UserDefaults.standard.bool(forKey: "hasUsedBackgroundRemoval")
+        hasUsedGhibliStyle = UserDefaults.standard.bool(forKey: "hasUsedGhibliStyle")
+        hasUsedPhotoEnhancement = UserDefaults.standard.bool(forKey: "hasUsedPhotoEnhancer")
         
         loadUploadedImages()
         loadSavedImages()
@@ -151,5 +157,20 @@ final class Consts {
     func setHasTunedModel(_ value: Bool) {
         hasTunedModel = value
         UserDefaults.standard.set(value, forKey: "hasTunedModel")
+    }
+    
+    func setHasUsedBackgroundRemover(_ value: Bool) {
+        hasUsedBackgroundRemoval = value
+        UserDefaults.standard.set(value, forKey: "hasUsedBackgroundRemoval")
+    }
+    
+    func setHasUsedGhibliStyle(_ value: Bool) {
+        hasUsedGhibliStyle = value
+        UserDefaults.standard.set(value, forKey: "hasUsedGhibliStyle")
+    }
+    
+    func setHasUsedPhotoEnhancer(_ value: Bool) {
+        hasUsedPhotoEnhancement = value
+        UserDefaults.standard.set(value, forKey: "hasUsedPhotoEnhancer")
     }
 }

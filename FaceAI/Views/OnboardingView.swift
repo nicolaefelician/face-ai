@@ -461,422 +461,244 @@ struct OnboardingView: View {
             let screenWidth = UIScreen.main.bounds.width
             let screenHeight = UIScreen.main.bounds.height
             
-            TabView(selection: $viewModel.currentPageIndex) {
-                VStack {
-                    ZStack {
-                        GifView(fileName: "onboarding1")
-                            .scaledToFill()
-                            .frame(width: screenWidth, height: screenHeight * 0.65)
-                            .clipped()
-                        
-                        VStack {
-                            LinearGradient(
-                                gradient: Gradient(colors: [
-                                    Color.white,
-                                    Color.white.opacity(0.95),
-                                    Color.white.opacity(0.7),
-                                    Color.white.opacity(0.4),
-                                    Color.white.opacity(0)
-                                ]),
-                                startPoint: .top,
-                                endPoint: .bottom
-                            )
-                            .frame(height: screenHeight * 0.17)
-                            .padding(.top, screenHeight * 0.05)
+            VStack(spacing: 0) {
+                TabView(selection: $viewModel.currentPageIndex) {
+                    VStack(spacing: 0) {
+                        ZStack {
+                            GifView(fileName: "onboarding1")
+                                .scaledToFill()
+                                .frame(width: screenWidth, height: screenHeight * 0.65)
+                                .clipped()
                             
-                            Spacer()
+                            VStack {
+                                LinearGradient(
+                                    gradient: Gradient(colors: [
+                                        Color.white,
+                                        Color.white.opacity(0.95),
+                                        Color.white.opacity(0.7),
+                                        Color.white.opacity(0.4),
+                                        Color.white.opacity(0)
+                                    ]),
+                                    startPoint: .top,
+                                    endPoint: .bottom
+                                )
+                                .frame(height: screenHeight * 0.17)
+                                
+                                Spacer()
+                            }
+                            
+                            VStack {
+                                Spacer()
+                                
+                                LinearGradient(
+                                    gradient: Gradient(colors: [
+                                        Color.white,
+                                        Color.white.opacity(0.95),
+                                        Color.white.opacity(0.7),
+                                        Color.white.opacity(0.4),
+                                        Color.white.opacity(0)
+                                    ]),
+                                    startPoint: .bottom,
+                                    endPoint: .top
+                                )
+                                .frame(height: screenHeight * 0.13)
+                            }
+                        }
+                        .padding(.top, -screenHeight * 0.065)
+                        
+                        Spacer()
+                        
+                        VStack(alignment: .leading) {
+                            Text("Welcome to")
+                                .font(.custom(Fonts.shared.instrumentSansSemibold, size: isIpad ? 45 : 26))
+                                .foregroundStyle(.black)
+                                .multilineTextAlignment(.leading)
+                            
+                            Text("Studio AI")
+                                .font(.custom(Fonts.shared.instrumentSansSemibold, size: isIpad ? 45 : 26))
+                                .foregroundStyle(Colors.shared.primaryColor)
+                                .multilineTextAlignment(.leading)
+                            
+                            Text("Welcome to Studio AI, where your photos transform into masterpieces with just a tap. Let's embark on a journey of effortless editing.")
+                                .font(.custom(Fonts.shared.interRegular, size: isIpad ? 21 : 17))
+                                .foregroundStyle(.black.opacity(0.7))
+                                .padding(.top, 4)
+                                .multilineTextAlignment(.leading)
+                        }
+                        .padding(.horizontal, isIpad ? 70 : 38)
+                        .padding(.bottom, screenHeight * 0.03)
+                    }
+                    .tag(0)
+                    
+                    
+                    VStack(spacing: 0) {
+                        ZStack {
+                            GifView(fileName: "onboarding4")
+                                .scaledToFill()
+                                .frame(height: screenHeight * 0.5)
+                                .frame(width: screenWidth * 0.95)
+                                .clipped()
+                                .offset(y: 35)
+                                .blur(radius: 15)
+                            
+                            GifView(fileName: "onboarding4")
+                                .scaledToFill()
+                                .frame(height: screenHeight * 0.5)
+                                .frame(width: screenWidth * 0.95)
+                                .clipped()
+                                .cornerRadius(23)
                         }
                         
-                        VStack {
-                            Spacer()
+                        Spacer()
+                        
+                        VStack(alignment: .leading) {
+                            Text("Access AI")
+                                .font(.custom(Fonts.shared.instrumentSansSemibold, size: isIpad ? 45 : 26))
+                                .foregroundStyle(.black)
+                                .multilineTextAlignment(.leading)
                             
-                            LinearGradient(
-                                gradient: Gradient(colors: [
-                                    Color.white,
-                                    Color.white.opacity(0.95),
-                                    Color.white.opacity(0.7),
-                                    Color.white.opacity(0.4),
-                                    Color.white.opacity(0)
-                                ]),
-                                startPoint: .bottom,
-                                endPoint: .top
-                            )
-                            .frame(height: screenHeight * 0.13)
+                            Text("Ghibli-Style Art")
+                                .font(.custom(Fonts.shared.instrumentSansSemibold, size: isIpad ? 45 : 26))
+                                .foregroundStyle(Colors.shared.primaryColor)
+                                .multilineTextAlignment(.leading)
+                            
+                            Text("Turn your photos into hand-drawn masterpieces with a tap, inspired by Ghibli's iconic style.")
+                                .font(.custom(Fonts.shared.interRegular, size: isIpad ? 21 : 17))
+                                .foregroundStyle(.black.opacity(0.7))
+                                .padding(.top, 4)
+                                .multilineTextAlignment(.leading)
                         }
-                        .padding(.bottom, screenHeight * 0.02)
+                        .padding(.horizontal, isIpad ? 70 : 35)
+                        .padding(.bottom, screenHeight * 0.03)
                     }
+                    .tag(1)
+                    .padding(.top, screenHeight * 0.045)
                     
-                    Spacer()
-                    
-                    VStack(alignment: .leading) {
-                        Text("Welcome to")
-                            .font(.custom(Fonts.shared.instrumentSansSemibold, size: isIpad ? 45 : 26))
-                            .foregroundStyle(.black)
-                            .multilineTextAlignment(.leading)
+                    VStack(spacing: 0) {
+                        ZStack {
+                            GifView(fileName: "onboarding2")
+                                .scaledToFill()
+                                .frame(height: screenHeight * 0.45)
+                                .frame(width: screenWidth * 0.95)
+                                .clipped()
+                                .offset(y: 35)
+                                .blur(radius: 15)
+                            
+                            GifView(fileName: "onboarding2")
+                                .scaledToFill()
+                                .frame(height: screenHeight * 0.475)
+                                .frame(width: screenWidth * 0.95)
+                                .clipped()
+                                .cornerRadius(23)
+                        }
                         
-                        Text("Face AI")
-                            .font(.custom(Fonts.shared.instrumentSansSemibold, size: isIpad ? 45 : 26))
-                            .foregroundStyle(Colors.shared.primaryColor)
-                            .multilineTextAlignment(.leading)
+                        Spacer()
                         
-                        Text("Welcome to Face AI, where your photos transform into masterpieces with just a tap. Let's embark on a journey of effortless editing.")
-                            .font(.custom(Fonts.shared.interRegular, size: isIpad ? 21 : 17))
-                            .foregroundStyle(.black.opacity(0.7))
-                            .padding(.top, 4)
-                            .multilineTextAlignment(.leading)
+                        VStack(alignment: .leading) {
+                            Text("AI-Powered")
+                                .font(.custom(Fonts.shared.instrumentSansSemibold, size: isIpad ? 45 : 26))
+                                .foregroundStyle(.black)
+                                .multilineTextAlignment(.leading)
+                            
+                            Text("Photo Enhancer")
+                                .font(.custom(Fonts.shared.instrumentSansSemibold, size: isIpad ? 45 : 26))
+                                .foregroundStyle(Colors.shared.primaryColor)
+                                .multilineTextAlignment(.leading)
+                            
+                            Text("Enhance your photos with one tap. Sharpen details, fix lighting, and restore clarity using AI technology.")
+                                .font(.custom(Fonts.shared.interRegular, size: isIpad ? 21 : 17))
+                                .foregroundStyle(.black.opacity(0.7))
+                                .padding(.top, 4)
+                                .multilineTextAlignment(.leading)
+                        }
+                        .padding(.horizontal, isIpad ? 70 : 35)
+                        .padding(.bottom, screenHeight * 0.03)
                     }
-                    .padding(.horizontal, isIpad ? 70 : 38)
-                    .padding(.bottom, screenHeight * 0.03)
+                    .tag(2)
+                    .padding(.top, screenHeight * 0.06)
                     
-                    Button(action: {
-                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                    VStack(spacing: 0) {
+                        ZStack {
+                            GifView(fileName: "onboarding3")
+                                .scaledToFill()
+                                .frame(height: screenHeight * 0.5)
+                                .frame(width: screenWidth * 0.95)
+                                .clipped()
+                                .offset(y: 35)
+                                .blur(radius: 15)
+                            
+                            GifView(fileName: "onboarding3")
+                                .scaledToFill()
+                                .frame(height: screenHeight * 0.5)
+                                .frame(width: screenWidth * 0.95)
+                                .clipped()
+                                .cornerRadius(23)
+                        }
+                        
+                        Spacer()
+                        
+                        VStack(alignment: .leading) {
+                            Text("Remove Backgrounds")
+                                .font(.custom(Fonts.shared.instrumentSansSemibold, size: isIpad ? 45 : 26))
+                                .foregroundStyle(.black)
+                                .multilineTextAlignment(.leading)
+                            
+                            Text("with One Tap")
+                                .font(.custom(Fonts.shared.instrumentSansSemibold, size: isIpad ? 45 : 26))
+                                .foregroundStyle(Colors.shared.primaryColor)
+                                .multilineTextAlignment(.leading)
+                            
+                            Text("Remove backgrounds in seconds with AI. Ideal for portraits, products, or profile pics — no manual edits.")
+                                .font(.custom(Fonts.shared.interRegular, size: isIpad ? 21 : 17))
+                                .foregroundStyle(.black.opacity(0.7))
+                                .padding(.top, 4)
+                                .multilineTextAlignment(.leading)
+                        }
+                        .padding(.horizontal, isIpad ? 70 : 38)
+                        .padding(.bottom, screenHeight * 0.03)
+                    }
+                    .tag(3)
+                    .padding(.top, screenHeight * 0.045)
+                }
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                
+                Button(action: {
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                    if viewModel.currentPageIndex < 3 {
                         withAnimation {
                             viewModel.currentPageIndex += 1
                         }
-                    }) {
-                        ZStack(alignment: .center) {
-                            Text("Continue")
-                                .font(.custom(Fonts.shared.interSemibold, size: isIpad ? 24 : 20))
-                                .foregroundStyle(Color.white)
-                                .padding(.vertical, isIpad ? 22 : 16)
-                                .frame(maxWidth: .infinity)
-                                .background(Colors.shared.primaryColor)
-                                .cornerRadius(24)
-                                .shadow(color: Color.black.opacity(0.15), radius: 6, x: 0, y: 4)
-                            
-                            HStack {
-                                Spacer()
-                                
-                                Image("arrow")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 21, height: 21)
-                                    .padding(.trailing, 15)
-                            }
-                        }
-                        .padding(.horizontal, isIpad ? 70 : 37)
-                        .padding(.bottom, 20)
-                    }
-                }
-                .padding(.top, -screenHeight * 0.13)
-                .tag(0)
-                
-                VStack {
-                    ZStack {
-                        GifView(fileName: "onboarding4")
-                            .scaledToFill()
-                            .frame(height: screenHeight * 0.5)
-                            .frame(width: screenWidth)
-                            .clipped()
-                        
-                        VStack {
-                            LinearGradient(
-                                gradient: Gradient(colors: [
-                                    Color.white,
-                                    Color.white,
-                                    Color.white.opacity(0.4),
-                                    Color.white.opacity(0)
-                                ]),
-                                startPoint: .top,
-                                endPoint: .bottom
-                            )
-                            .frame(height: screenHeight * 0.13)
-                            
-                            Spacer()
-                        }
-                        
-                        VStack {
-                            Spacer()
-                            
-                            LinearGradient(
-                                gradient: Gradient(colors: [
-                                    Color.white,
-                                    Color.white.opacity(0.99),
-                                    Color.white.opacity(0.85),
-                                    Color.white.opacity(0.7),
-                                    Color.white.opacity(0.5),
-                                    Color.white.opacity(0.3),
-                                    Color.white.opacity(0.2),
-                                    Color.white.opacity(0.15),
-                                    Color.white.opacity(0.1),
-                                    Color.white.opacity(0.05),
-                                    Color.white.opacity(0)
-                                ]),
-                                startPoint: .bottom,
-                                endPoint: .top
-                            )
-                            .frame(height: screenHeight * 0.13)
-                            .padding(.bottom, screenHeight * 0.01)
-                        }
-                    }
-                    
-                    Spacer()
-                    
-                    VStack(alignment: .leading) {
-                        Text("Access AI")
-                            .font(.custom(Fonts.shared.instrumentSansSemibold, size: isIpad ? 45 : 26))
-                            .foregroundStyle(.black)
-                            .multilineTextAlignment(.leading)
-                        
-                        Text("Ghibli-Style Art")
-                            .font(.custom(Fonts.shared.instrumentSansSemibold, size: isIpad ? 45 : 26))
-                            .foregroundStyle(Colors.shared.primaryColor)
-                            .multilineTextAlignment(.leading)
-                        
-                        Text("Turn your photos into hand-drawn masterpieces with a tap, inspired by Ghibli’s iconic style.")
-                            .font(.custom(Fonts.shared.interRegular, size: isIpad ? 21 : 17))
-                            .foregroundStyle(.black.opacity(0.7))
-                            .padding(.top, 4)
-                            .multilineTextAlignment(.leading)
-                    }
-                    .padding(.horizontal, isIpad ? 70 : 35)
-                    .padding(.bottom, screenHeight * 0.03)
-                    
-                    Button(action: {
-                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                        withAnimation {
-                            viewModel.currentPageIndex += 1
-                        }
-                    }) {
-                        ZStack(alignment: .center) {
-                            Text("Continue")
-                                .font(.custom(Fonts.shared.interSemibold, size: isIpad ? 24 : 20))
-                                .foregroundStyle(Color.white)
-                                .padding(.vertical, isIpad ? 22 : 16)
-                                .frame(maxWidth: .infinity)
-                                .background(Colors.shared.primaryColor)
-                                .cornerRadius(24)
-                                .shadow(color: Color.black.opacity(0.15), radius: 6, x: 0, y: 4)
-                            
-                            HStack {
-                                Spacer()
-                                
-                                Image("arrow")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 21, height: 21)
-                                    .padding(.trailing, 15)
-                            }
-                        }
-                        .padding(.horizontal, isIpad ? 70 : 37)
-                        .padding(.bottom, 20)
-                    }
-                }
-                .padding(.top, screenHeight * 0.015)
-                .tag(1)
-                
-                VStack {
-                    ZStack {
-                        GifView(fileName: "onboarding2")
-                            .scaledToFill()
-                            .frame(height: screenHeight * 0.525)
-                            .frame(width: screenWidth)
-                            .clipped()
-                        
-                        VStack {
-                            LinearGradient(
-                                gradient: Gradient(colors: [
-                                    Color.white,
-                                    Color.white,
-                                    Color.white.opacity(0.4),
-                                    Color.white.opacity(0)
-                                ]),
-                                startPoint: .top,
-                                endPoint: .bottom
-                            )
-                            .frame(height: screenHeight * 0.13)
-                            
-                            Spacer()
-                        }
-                        
-                        VStack {
-                            Spacer()
-                            
-                            LinearGradient(
-                                gradient: Gradient(colors: [
-                                    Color.white,
-                                    Color.white.opacity(0.99),
-                                    Color.white.opacity(0.85),
-                                    Color.white.opacity(0.7),
-                                    Color.white.opacity(0.5),
-                                    Color.white.opacity(0.3),
-                                    Color.white.opacity(0.2),
-                                    Color.white.opacity(0.15),
-                                    Color.white.opacity(0.1),
-                                    Color.white.opacity(0.05),
-                                    Color.white.opacity(0)
-                                ]),
-                                startPoint: .bottom,
-                                endPoint: .top
-                            )
-                            .frame(height: screenHeight * 0.13)
-                        }
-                    }
-                    
-                    Spacer()
-                    
-                    VStack(alignment: .leading) {
-                        Text("AI-Powered")
-                            .font(.custom(Fonts.shared.instrumentSansSemibold, size: isIpad ? 45 : 26))
-                            .foregroundStyle(.black)
-                            .multilineTextAlignment(.leading)
-                        
-                        Text("Photo Enhancer")
-                            .font(.custom(Fonts.shared.instrumentSansSemibold, size: isIpad ? 45 : 26))
-                            .foregroundStyle(Colors.shared.primaryColor)
-                            .multilineTextAlignment(.leading)
-                        
-                        Text("Enhance your photos with one tap. Sharpen details, fix lighting, and restore clarity using AI technology.")
-                            .font(.custom(Fonts.shared.interRegular, size: isIpad ? 21 : 17))
-                            .foregroundStyle(.black.opacity(0.7))
-                            .padding(.top, 4)
-                            .multilineTextAlignment(.leading)
-                    }
-                    .padding(.horizontal, isIpad ? 70 : 35)
-                    .padding(.bottom, screenHeight * 0.03)
-                    
-                    Button(action: {
-                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                        withAnimation {
-                            viewModel.currentPageIndex += 1
-                        }
-                    }) {
-                        ZStack(alignment: .center) {
-                            Text("Continue")
-                                .font(.custom(Fonts.shared.interSemibold, size: isIpad ? 24 : 20))
-                                .foregroundStyle(Color.white)
-                                .padding(.vertical, isIpad ? 22 : 16)
-                                .frame(maxWidth: .infinity)
-                                .background(Colors.shared.primaryColor)
-                                .cornerRadius(24)
-                                .shadow(color: Color.black.opacity(0.15), radius: 6, x: 0, y: 4)
-                            
-                            HStack {
-                                Spacer()
-                                
-                                Image("arrow")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 21, height: 21)
-                                    .padding(.trailing, 15)
-                            }
-                        }
-                        .padding(.horizontal, isIpad ? 70 : 37)
-                        .padding(.bottom, 20)
-                    }
-                }
-                .padding(.top, screenHeight * 0.03)
-                .tag(2)
-                
-                VStack {
-                    ZStack {
-                        GifView(fileName: "onboarding3")
-                            .scaledToFill()
-                            .frame(height: screenHeight * 0.525)
-                            .frame(width: screenWidth)
-                            .clipped()
-                        
-                        VStack {
-                            LinearGradient(
-                                gradient: Gradient(colors: [
-                                    Color.white,
-                                    Color.white,
-                                    Color.white.opacity(0.4),
-                                    Color.white.opacity(0)
-                                ]),
-                                startPoint: .top,
-                                endPoint: .bottom
-                            )
-                            .frame(height: screenHeight * 0.13)
-                            .padding(.top, 20)
-                            
-                            Spacer()
-                        }
-                        
-                        VStack {
-                            Spacer()
-                            
-                            LinearGradient(
-                                gradient: Gradient(colors: [
-                                    Color.white,
-                                    Color.white.opacity(0.99),
-                                    Color.white.opacity(0.85),
-                                    Color.white.opacity(0.7),
-                                    Color.white.opacity(0.5),
-                                    Color.white.opacity(0.3),
-                                    Color.white.opacity(0.2),
-                                    Color.white.opacity(0.15),
-                                    Color.white.opacity(0.1),
-                                    Color.white.opacity(0.05),
-                                    Color.white.opacity(0)
-                                ]),
-                                startPoint: .bottom,
-                                endPoint: .top
-                            )
-                            .frame(height: screenHeight * 0.13)
-                            .padding(.bottom, screenHeight * 0.02)
-                        }
-                    }
-                    
-                    Spacer()
-                    
-                    VStack(alignment: .leading) {
-                        Text("Remove Backgrounds")
-                            .font(.custom(Fonts.shared.instrumentSansSemibold, size: isIpad ? 45 : 26))
-                            .foregroundStyle(.black)
-                            .multilineTextAlignment(.leading)
-                        
-                        Text("with One Tap")
-                            .font(.custom(Fonts.shared.instrumentSansSemibold, size: isIpad ? 45 : 26))
-                            .foregroundStyle(Colors.shared.primaryColor)
-                            .multilineTextAlignment(.leading)
-                        
-                        Text("Remove backgrounds in seconds with AI. Ideal for portraits, products, or profile pics — no manual edits.")
-                            .font(.custom(Fonts.shared.interRegular, size: isIpad ? 21 : 17))
-                            .foregroundStyle(.black.opacity(0.7))
-                            .padding(.top, 4)
-                            .multilineTextAlignment(.leading)
-                    }
-                    .padding(.horizontal, isIpad ? 70 : 38)
-                    .padding(.bottom, screenHeight * 0.03)
-                    
-                    Button(action: {
-                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                    } else {
                         withAnimation {
                             viewModel.showGenderPicker = true
                         }
-                    }) {
-                        ZStack(alignment: .center) {
-                            Text("Continue")
-                                .font(.custom(Fonts.shared.interSemibold, size: isIpad ? 24 : 20))
-                                .foregroundStyle(Color.white)
-                                .padding(.vertical, isIpad ? 22 : 16)
-                                .frame(maxWidth: .infinity)
-                                .background(Colors.shared.primaryColor)
-                                .cornerRadius(24)
-                                .shadow(color: Color.black.opacity(0.15), radius: 6, x: 0, y: 4)
-                            
-                            HStack {
-                                Spacer()
-                                
-                                Image("arrow")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 21, height: 21)
-                                    .padding(.trailing, 15)
-                            }
-                        }
-                        .padding(.horizontal, isIpad ? 70 : 37)
-                        .padding(.bottom, 20)
                     }
+                }) {
+                    ZStack(alignment: .center) {
+                        Text("Continue")
+                            .font(.custom(Fonts.shared.interSemibold, size: isIpad ? 24 : 20))
+                            .foregroundStyle(Color.white)
+                            .padding(.vertical, isIpad ? 22 : 16)
+                            .frame(maxWidth: .infinity)
+                            .background(Colors.shared.primaryColor)
+                            .cornerRadius(24)
+                            .shadow(color: Color.black.opacity(0.15), radius: 6, x: 0, y: 4)
+                        
+                        HStack {
+                            Spacer()
+                            
+                            Image("arrow")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 21, height: 21)
+                                .padding(.trailing, 15)
+                        }
+                    }
+                    .padding(.horizontal, isIpad ? 70 : 37)
+                    .padding(.bottom, 20)
                 }
-                .tag(3)
             }
-            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             .ignoresSafeArea(edges: .top)
-            .onAppear(perform: {
-                UIScrollView.appearance().isScrollEnabled = false
-            })
         }
     }
 }

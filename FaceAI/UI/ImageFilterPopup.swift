@@ -124,12 +124,31 @@ struct ImageFilterPopup: View {
                     HStack(spacing: 20) {
                         Button("Cancel") {
                             withAnimation {
+                                globalState.selectedFilterType = .enhance
                                 globalState.showImageFilter = false
                             }
                         }
                         .foregroundColor(.gray)
                         
                         Button("Apply") {
+                            let filterType = globalState.selectedFilterType
+                            
+                            let isFirstTime = switch filterType {
+                                case .enhance: !Consts.shared.hasUsedPhotoEnhancement
+                                case .ghibli: !Consts.shared.hasUsedGhibliStyle
+                                case .removeBackground: !Consts.shared.hasUsedBackgroundRemoval
+                            }
+                            
+                            if isFirstTime {
+                                switch filterType {
+                                case .enhance: Consts.shared.setHasUsedPhotoEnhancer(true)
+                                case .ghibli: Consts.shared.setHasUsedGhibliStyle(true)
+                                case .removeBackground: Consts.shared.setHasUsedBackgroundRemover(true)
+                                }
+                                confirmAction()
+                                return
+                            }
+                            
                             if globalState.credits < 1 {
                                 Superwall.shared.register(placement: "campaign_trigger")
                                 return
