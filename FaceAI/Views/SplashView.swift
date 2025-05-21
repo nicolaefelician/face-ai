@@ -61,7 +61,7 @@ struct SplashView: View {
             VStack(spacing: 10) {
                 Spacer()
                 
-                Text("Studio AI")
+                Text("Toon AI")
                     .font(.custom(Fonts.shared.instrumentSansSemibold, size: 28))
                     .foregroundStyle(.red.opacity(0.9))
                 

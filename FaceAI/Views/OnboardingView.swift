@@ -514,12 +514,12 @@ struct OnboardingView: View {
                                 .foregroundStyle(.black)
                                 .multilineTextAlignment(.leading)
                             
-                            Text("Studio AI")
+                            Text("Toon AI")
                                 .font(.custom(Fonts.shared.instrumentSansSemibold, size: isIpad ? 45 : 26))
                                 .foregroundStyle(Colors.shared.primaryColor)
                                 .multilineTextAlignment(.leading)
                             
-                            Text("Welcome to Studio AI, where your photos transform into masterpieces with just a tap. Let's embark on a journey of effortless editing.")
+                            Text("Welcome to Toon AI, where your photos transform into masterpieces with just a tap. Let's embark on a journey of effortless editing.")
                                 .font(.custom(Fonts.shared.interRegular, size: isIpad ? 21 : 17))
                                 .foregroundStyle(.black.opacity(0.7))
                                 .padding(.top, 4)
